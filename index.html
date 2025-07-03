@@ -1,0 +1,342 @@
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <script type="module" src="register.js" defer></script>
+    <script type="module" src="login.js" defer></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <title>أُنس</title>
+</head>
+
+<body>
+    <!--Header / Navbar-->
+    <header>
+        <nav class="navbar section-content">
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#services" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i>&nbsp
+                        &nbspخدماتنا</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#home-specialists" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp
+                        &nbspالمختصين</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#join-specialist" class="nav-link"><i class="fa-solid fa-address-card"></i>&nbsp &nbspانضم كمختص </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#footer" class="nav-link button contact-us"> <i class="fa-solid fa-phone"></i>&nbsp
+                        &nbspتواصل معنا </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="form-open"> <i
+                            class="fa-solid fa-right-to-bracket"></i>&nbsp &nbspتسجيل الدخول</a>
+                </li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+
+        </nav>
+    </header>
+
+    <main>
+        <!-- Login & Sign Up Form -->
+        <div class="form_container">
+            <i class="uil uil-times form_close"></i>
+
+            <!-- Login Form -->
+            <div class="form login_form">
+                <form action="#">
+                    <h2>تسجيل الدخول</h2>
+
+                    <div class="input_box">
+                        <input type="email" placeholder="البريد الالكتروني" id="email-l" />
+                        <i class="uil uil-envelope-alt email"></i>
+                    </div>
+
+                    <div class="input_box">
+                        <input type="password" placeholder="كلمة السر" id="password-l" required />
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+
+                    <div class="option_field">
+                        <span class="checkbox">
+                            <input type="checkbox" id="check" />
+                            <label for="check">تذكرني</label>
+                        </span>
+                        <a href="#" class="forgot_pw">نسيت كلمة المرور؟</a>
+                    </div>
+
+                    <button class="button" type="submit" id="submit-l">تسجيل
+                        الدخول</button>
+
+                    <div class="login_signup">
+                        ليس لديك حساب؟ <a href="#" id="signup">إنشاء حساب</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="form signup_form">
+                <form action="#">
+                    <h2> انشاء حساب</h2>
+
+                    <div class="input_box">
+                        <input  placeholder=" الاسم الكامل" required id="name-r"/>
+                        <i class="uil uil-envelope-alt email"></i>
+                    </div>
+
+                    <div class="input_box">
+                        <input type="email" placeholder="البريد الالكتروني" required id="email-r"/>
+                        <i class="uil uil-envelope-alt email"></i>
+                    </div>
+
+                    <div class="input_box">
+                        <input type="password" placeholder="كلمة السر" required id="psw-r"/>
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+                    <div class="input_box">
+                        <input type="password" placeholder="تأكيد كلمة السر" required id="psw2-r"/>
+                        <i class="uil uil-lock password"></i>
+                        <i class="uil uil-eye-slash pw_hide"></i>
+                    </div>
+                    <button class="button" type="submit" id="submit-r">انشاء حساب</button>
+
+                    <div class="login_signup">
+                        لديك حساب؟ <a href="#" id="login">تسجيل الدخول</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--Hero Section-->
+        <section class="hero-section">
+            <div class="section-content">
+                <div class="hero-details">
+                    <div class="hero-top">
+                        <img src="images/logoo.png" alt="">
+                        <h2 class="title">أُنس</h2>
+                    </div>
+                    <h3 class="subtitle">نرافقك لبناء حياة زوجية وأسرية مستقرة وسعيدة
+
+                    </h3>
+                    <div class="buttons">
+                        <a href="#" class="button order-now">ابدأ رحلتك الان</a>
+                        <a href="#contact" class="button contact-us">تواصل معنا</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="images/hero.png" alt="Hero" class="hero-image">
+                </div>
+            </div>
+        </section>
+        <!--Our services Section-->
+        <section class="services-section" id="services">
+            <div class="section-content">
+
+                <div class="features">
+                    <div class="feature-box">
+                        <div class="icon"><i class="fa-regular fa-lightbulb"></i></div>
+                        <h3 class="feature-title">الاستشارات</h3>
+                        <p class="feature-desc">حلّ أساسه الموازنة. بناء بفعالية للتنفيذ.</p>
+                    </div>
+
+                    <div class="feature-box">
+                        <div class="icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+                        <h3 class="feature-title">الدورات</h3>
+                        <p class="feature-desc">دوركِ برؤى وموارد لتفاعل الكلية.</p>
+                    </div>
+
+                    <div class="feature-box">
+                        <div class="icon"><i class="fa-brands fa-rocketchat"></i></div>
+                        <h3 class="feature-title">الاختبارات</h3>
+                        <p class="feature-desc">تضبط الذات، وتمنح زينة البديهة والموقف.</p>
+                    </div>
+                </div>
+                <div class="services-details">
+                    <h2 class="section-title">خدماتنا</h2>
+                </div>
+            </div>
+        </section>
+
+        <!--specialists Section-->
+        <section class="home-specialists" id="home-specialists">
+            <h2 class="section-title">المختصين </h2>
+
+            <div class="slide-container-u swiper">
+                <div class="slide-content-u">
+                    <div class="card-wrapper-u swiper-wrapper">
+                        <div class="card-u swiper-slide">
+                            <div class="image-content-u">
+                                <span class="overlay"></span>
+
+                                <div class="card-image-u">
+                                    <img src="images/psy5.png" alt="" class="card-img-u">
+                                </div>
+
+                            </div>
+                            <div class="card-content-u">
+                                <h2 class="name-u-t">أ. ياسين صباحي</h2>
+                                <p class="description-u-t">مختص في الدعم النفسي قبل الزواج وبعده، مع خبرة في التوجيه
+                                    الأسري الحديث.</p>
+                            </div>
+
+                        </div>
+                        <div class="card-u swiper-slide">
+                            <div class="image-content-u">
+                                <span class="overlay"></span>
+
+                                <div class="card-image-u">
+                                    <img src="images/psy2.png" alt="" class="card-img-u">
+                                </div>
+
+                            </div>
+                            <div class="card-content-u">
+                                <h2 class="name-u-t">د. سامية الراشدي</h2>
+                                <p class="description-u-t">استشارية في العلاقات الأسرية، بخبرة 15 سنة في حل الخلافات
+                                    الزوجية وتعزيز التواصل العاطفي.</p>
+                            </div>
+
+                        </div>
+                        <div class="card-u swiper-slide">
+                            <div class="image-content-u">
+                                <span class="overlay"></span>
+
+                                <div class="card-image-u">
+                                    <img src="images/psy1.png" alt="" class="card-img-u">
+                                </div>
+
+                            </div>
+                            <div class="card-content-u">
+                                <h2 class="name-u-t">أ. كريم الناصري</h2>
+                                <p class="description-u-t">أخصائي نفسي معتمد، متخصص في الذكاء العاطفي وإدارة الصراعات
+                                    بين الأزواج.</p>
+                            </div>
+
+                        </div>
+                        <div class="card-u swiper-slide">
+                            <div class="image-content-u">
+                                <span class="overlay"></span>
+
+                                <div class="card-image-u">
+                                    <img src="images/psy4.png" alt="" class="card-img-u">
+                                </div>
+
+                            </div>
+                            <div class="card-content-u">
+                                <h2 class="name-u-t">د. ليلى بن سالم</h2>
+                                <p class="description-u-t">معالجة أسرية تقدم جلسات فردية وجماعية، تركز على بناء الثقة
+                                    والتفاهم في العلاقة.</p>
+                            </div>
+
+                        </div>
+                        <div class="card-u swiper-slide">
+                            <div class="image-content-u">
+                                <span class="overlay"></span>
+
+                                <div class="card-image-u">
+                                    <img src="images/psy3.png" alt="" class="card-img-u">
+                                </div>
+
+                            </div>
+                            <div class="card-content-u">
+                                <h2 class="name-u-t">أ. فؤاد المداني</h2>
+                                <p class="description-u-t">مدرّب حياة زوجية، يساعد الأزواج على تجاوز الأزمات العاطفية
+                                    وتحقيق الانسجام.</p>
+                            </div>
+
+                        </div>
+                        <div class="card-u swiper-slide">
+                            <div class="image-content-u">
+                                <span class="overlay"></span>
+
+                                <div class="card-image-u">
+                                    <img src="images/psy4.png" alt="" class="card-img-u">
+                                </div>
+
+                            </div>
+                            <div class="card-content-u">
+                                <h2 class="name-u-t">د. نجلاء السالمي</h2>
+                                <p class="description-u-t">خبيرة في العلاج السلوكي المعرفي للأزواج، تهتم بتعديل أنماط
+                                    التفكير السلبية بين الطرفين.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev swiper-navBtn-u"></div>
+                <div class="swiper-button-next swiper-navBtn-u"></div>
+            </div>
+        </section>
+        <!--Join Us as specialists Section-->
+        <section class="join-sp-section" id="join-specialist">
+            <h2 class="section-title">نموذج الانضمام</h2>
+            <div class="section-content">
+                <form action="#" class="join-sp-form">
+                    <input type="text" placeholder="الاسم الكامل" class="form-input" required>
+                    <input type="email" placeholder="البريد الالكتروني" class="form-input" required>
+                    <input type="text" placeholder="رقم الهاتف" class="form-input" required>
+                    <input type="text" placeholder="التخصص" class="form-input" required>
+                    <input type="text" placeholder="سنوات الخبرة" class="form-input" required>
+                    <input type="text" placeholder="رابط السيرة الذاتية pdf" class="form-input" required>
+                    <textarea placeholder="رسالة تعريفية" class="form-input"></textarea>
+                    <button class="submit-button">ارسال</button>
+                </form>
+            </div>
+        </section>
+        <!--Footer Section-->
+        <footer class="footer-section" id="footer">
+            <div class="section-content">
+                <p class="policy-text">
+                    <a href="#" class="policy-link">شروط الاستخدام</a>
+                    <span class="separator">•</span>
+                    <a href="#" class="policy-link">سياسة الخصوصية</a>
+                </p>
+                <div class="idk">
+                    <div class="social-link-list">
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <p class="copyright-text">2025 © جميع الحقوق محفوظة</p>
+                </div>
+                <div class="idk-logo policy-link">
+                    <h1>أُنس</h1>
+                    <p>للإرشاد الزواجي والأسري</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

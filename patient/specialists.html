@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../css/patient/specialists.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أُنس</title>
+</head>
+
+<body>
+     <header>
+        <nav class="navbar section-content">
+            <ul class="nav-menu">
+              <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
+                </li>
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item">
+                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp &nbspالمختصين </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="tests.html" class="nav-link"><i class="fa-solid fa-vial"></i>&nbsp &nbspالاختبارات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp &nbspالمقالات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات الحساب</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp &nbspتسجيل الخروج </i>
+</a>
+                </li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+
+        </nav>
+    </header>
+
+    <section class="about-section" id="about">
+        <div class="section-content">
+            <div class="about-details">
+                <h2 class="section-title">المختصين</h2>
+                <p class="text">تواصل مع مختصين لتحسين علاقتك.</p>
+                <div class="filters">
+                    <select id="filter-specialty">
+                        <option value="all">كل التخصصات</option>
+                        <option value="نفسي">نفسي</option>
+                        <option value="أسري">أسري</option>
+                        <option value="زوجي">زوجي</option>
+                    </select>
+
+                    <select id="filter-gender">
+                        <option value="all">الجميع</option>
+                        <option value="رجل">رجل</option>
+                        <option value="امرأة">امرأة</option>
+                    </select>
+                </div>
+
+                <div class="card-container">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Sections -->
+
+     <footer class="footer-section">
+        <div class="section-content">
+            <p class="policy-text">
+                <a href="#" class="policy-link">شروط الاستخدام</a>
+                <span class="separator">•</span>
+                <a href="#" class="policy-link">سياسة الخصوصية</a>
+            </p>
+            <div class="idk">
+                <div class="social-link-list">
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+                <p class="copyright-text">2025 © جميع الحقوق محفوظة</p>
+            </div>
+            <div class="idk-logo policy-link">
+                <h1>أُنس</h1>
+                <p>للإرشاد الزواجي والأسري</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script src="../script.js"></script>
+    <script type="module" src="../specialists.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".doctor-rating").each(function () {
+                $(this).rateYo({
+                    rating: $(this).data('rating'),
+                    starWidth: "20px",
+                    ratedFill: "#FFD700",
+                    normalFill: "#CCCCCC",
+                    readOnly: true,
+                    rtl: true,
+                    numStars: 5,
+                    precision: 1
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

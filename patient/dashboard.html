@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="../css/patient/dashboard.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أُنس</title>
+</head>
+<body>
+     <header>
+        <nav class="navbar section-content">
+            <ul class="nav-menu">
+              <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
+                </li>
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item">
+                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp &nbspالمختصين </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="tests.html" class="nav-link"><i class="fa-solid fa-vial"></i>&nbsp &nbspالاختبارات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp &nbspالمقالات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات الحساب</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp &nbspتسجيل الخروج </i>
+</a>
+                </li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+
+        </nav>
+    </header>
+      <!-- Welcome user Section -->
+
+    <section class="welcome-section" id="welcome">
+            <div class="section-content">
+                <div class="welcome-image-wrapper">
+                    <img src="../images/client1.png" alt="Welcome Home" class="welcome-image">
+                </div>
+                <div class="welcome-details">
+                    <h2 class="section-title">مرحبًا بك، [اسم المستخدم]</h2>
+
+                    <p class="text">ابدأ رحلتك نحو علاقة أفضل 💖</p>  
+                </div>
+            </div>
+        </section>
+  <!-- Specialists Section -->
+  <section class="p-specialists">
+    <h2 class="section-title">👩‍⚕️ المختصين </h2>
+
+    <div class="slide-container-u swiper">
+      <div class="slide-content-u">
+        <div class="card-wrapper-u swiper-wrapper">
+          <div class="card-u swiper-slide">
+            <div class="image-content-u">
+              <span class="overlay"></span>
+
+              <div class="card-image-u">
+                <img src="../images/m1.jpg" alt="" class="card-img-u">
+              </div>
+
+            </div>
+            <div class="card-content-u">
+              <h2 class="name-u-t">أ. ياسين صباحي</h2>
+              <p class="description-u-t">مختص في الدعم النفسي قبل الزواج وبعده، مع خبرة في التوجيه الأسري الحديث.</p>
+              <div class="doctor-rating" data-rating="0.5"></div>
+
+              <button class="button-u-t">احجز جلسة</button>
+
+            </div>
+
+          </div>
+          <div class="card-u swiper-slide">
+            <div class="image-content-u">
+              <span class="overlay"></span>
+
+              <div class="card-image-u">
+                <img src="../images/wm1.jpg" alt="" class="card-img-u">
+              </div>
+
+            </div>
+            <div class="card-content-u">
+              <h2 class="name-u-t">د. سامية الراشدي</h2>
+              <p class="description-u-t">استشارية في العلاقات الأسرية، بخبرة 15 سنة في حل الخلافات الزوجية وتعزيز التواصل العاطفي.</p>
+              <div class="doctor-rating" data-rating="4.5"></div>
+
+              <button class="button-u-t">احجز جلسة</button>
+
+            </div>
+
+          </div>
+          <div class="card-u swiper-slide">
+            <div class="image-content-u">
+              <span class="overlay"></span>
+
+              <div class="card-image-u">
+                <img src="../images/m2.jpg" alt="" class="card-img-u">
+              </div>
+
+            </div>
+            <div class="card-content-u">
+              <h2 class="name-u-t">أ. كريم الناصري</h2>
+              <p class="description-u-t">أخصائي نفسي معتمد، متخصص في الذكاء العاطفي وإدارة الصراعات بين الأزواج.</p>
+              <div class="doctor-rating" data-rating="2.5"></div>
+
+              <button class="button-u-t">احجز جلسة</button>
+
+            </div>
+
+          </div>
+          <div class="card-u swiper-slide">
+            <div class="image-content-u">
+              <span class="overlay"></span>
+
+              <div class="card-image-u">
+                <img src="../images/wm.jpg" alt="" class="card-img-u">
+              </div>
+
+            </div>
+            <div class="card-content-u">
+              <h2 class="name-u-t">د. ليلى بن سالم</h2>
+              <p class="description-u-t">معالجة أسرية تقدم جلسات فردية وجماعية، تركز على بناء الثقة والتفاهم في العلاقة.</p>
+              <div class="doctor-rating" data-rating="1.5"></div>
+
+              <button class="button-u-t">احجز جلسة</button>
+
+            </div>
+
+          </div>
+          <div class="card-u swiper-slide">
+            <div class="image-content-u">
+              <span class="overlay"></span>
+
+              <div class="card-image-u">
+                <img src="../images/m1.jpg" alt="" class="card-img-u">
+              </div>
+
+            </div>
+            <div class="card-content-u">
+              <h2 class="name-u-t">أ. فؤاد المداني</h2>
+              <p class="description-u-t">مدرّب حياة زوجية، يساعد الأزواج على تجاوز الأزمات العاطفية وتحقيق الانسجام.</p>
+              <div class="doctor-rating" data-rating="4.5"></div>
+
+              <button class="button-u-t">احجز جلسة</button>
+
+            </div>
+
+          </div>
+          <div class="card-u swiper-slide">
+            <div class="image-content-u">
+              <span class="overlay"></span>
+
+              <div class="card-image-u">
+                <img src="../images/wm1.jpg" alt="" class="card-img-u">
+              </div>
+
+            </div>
+            <div class="card-content-u">
+              <h2 class="name-u-t">د. نجلاء السالمي</h2>
+              <p class="description-u-t">خبيرة في العلاج السلوكي المعرفي للأزواج، تهتم بتعديل أنماط التفكير السلبية بين الطرفين.</p>
+              <div class="doctor-rating" data-rating="3.5"></div>
+              <button class="button-u-t">احجز جلسة</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <!-- If we need navigation buttons -->
+      <div class="swiper-button-prev swiper-navBtn-u"></div>
+      <div class="swiper-button-next swiper-navBtn-u"></div>
+    </div>
+  </section>
+
+  <!-- test Sections -->
+  <section class="p-tests-section" id="tests">
+            <h2 class="section-title">الاختبارات</h2>
+            <div class="section-content">
+                <div class="slider-container swiper">
+                    <div class="slider-wrapper">
+                        <ul class="p-test-list swiper-wrapper">
+                            <li class="p-tests swiper-slide">
+                                <img src="../images/10.png" alt="User" class="user-image">
+                                <h3 class="name">تحليل التوافق الذكي</h3>
+                                <i class="feedback">اختبر مدى توافقك مع شريكك من خلال مجموعة أسئلة مدروسة</i>
+                            </li>
+                            <li class="p-tests swiper-slide">
+                                <img src="../images/4.png" alt="User" class="user-image">
+                                <h3 class="name">الاستشارات الفردية / الجماعية</h3>
+                                <i class="feedback">احجز جلسة مع مختص يساعدك على فهم و حل مشاكلك</i>
+                            </li>
+                            <li class="p-tests swiper-slide">
+                                <img src="../images/6.png" alt="User" class="user-image">
+                                <h3 class="name">دورات وصف عام فقط</h3>
+                                <i class="feedback">محتوى جزائري أصيل يجهزك لعلاقة ناجحة</i>
+                            </li>
+                            <li class="p-tests swiper-slide">
+                                <img src="../images/11.png" alt="User" class="user-image">
+                                <h3 class="name">روبوت الأسئلة</h3>
+                                <i class="feedback">اختر سئالك و احصل على اجابة دقيقة في الحال</i>
+                            </li>
+                            <li class="p-tests swiper-slide">
+                                <img src="../images/5.png" alt="User" class="user-image">
+                                <h3 class="name"> المحتوى التفاعلي</h3>
+                                <i class="feedback">مقالات, قصص, اقتباسات...</i>
+                            </li>
+                        </ul>
+
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-slide-button swiper-button-prev"></div>
+                        <div class="swiper-slide-button swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+  <!-- Footer Sections -->
+
+  <footer class="footer-section">
+        <div class="section-content">
+            <p class="policy-text">
+                <a href="#" class="policy-link">شروط الاستخدام</a>
+                <span class="separator">•</span>
+                <a href="#" class="policy-link">سياسة الخصوصية</a>
+            </p>
+            <div class="idk">
+                <div class="social-link-list">
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+                <p class="copyright-text">2025 © جميع الحقوق محفوظة</p>
+            </div>
+            <div class="idk-logo policy-link">
+                <h1>أُنس</h1>
+                <p>للإرشاد الزواجي والأسري</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+    <script src="../script.js"></script>
+
+    <script>
+$(document).ready(function() {
+    $(".doctor-rating").each(function() {
+        $(this).rateYo({
+            rating: $(this).data('rating'),
+            starWidth: "20px",
+            ratedFill: "#FFD700",
+            normalFill: "#CCCCCC",
+            readOnly: true,
+            rtl: true,
+            numStars: 5,
+            precision: 1 
+        });
+    });
+});
+</script>
+</body>
+</html>
