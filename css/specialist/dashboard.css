@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Sans+Arabic&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Poppins&display=swap');
 
 .ibm-plex-sans-arabic-regular {
-  font-family: "IBM Plex Sans Arabic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 
@@ -17,58 +17,64 @@
 html {
     scroll-behavior: smooth;
 }
+
 :root {
     /* Colors */
---text-color: #30698c;
---blue-color: #85aeca;
---pink-color: #fdd0d7;
---white-color: #fff;
---dark-color: #000814;
---primary-color: #30698c;
---secondary-color: #fdd0d7;
---medium-gray-color: #ccc;
+    --text-color: #30698c;
+    --blue-color: #85aeca;
+    --pink-color: #fdd0d7;
+    --white-color: #fff;
+    --dark-color: #000814;
+    --primary-color: #30698c;
+    --secondary-color: #fdd0d7;
+    --medium-gray-color: #ccc;
 
-/* Font size */
---font-size-s: 0.9rem;
---font-size-n: 1rem;
---font-size-m: 1.12rem;
---font-size-l: 1.5rem;
---font-size-xl: 2rem;
---font-size-xxl: 2.3rem;
+    /* Font size */
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 2.3rem;
 
-/* Font weight */
---font-weight-normal: 400;
---font-weight-medium: 500;
---font-weight-semibold: 600;
---font-weight-bold: 700;
+    /* Font weight */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 
-/* Border radius */
---border-radius-s: 8px;
---border-radius-m: 30px;
---border-radius-circle: 50%;
+    /* Border radius */
+    --border-radius-s: 8px;
+    --border-radius-m: 30px;
+    --border-radius-circle: 50%;
 
-/* Site max width */
---site-max-width: 1300px;
+    /* Site max width */
+    --site-max-width: 1300px;
 
 }
+
 ul {
     list-style: none;
 }
+
 a {
     text-decoration: none;
 }
+
 button {
     cursor: pointer;
     border: none;
     background: none;
 }
+
 img {
     width: 100%;
 }
+
 .section-content {
     max-width: var(--site-max-width);
     margin: 0 auto;
-    padding:  0 20px;
+    padding: 0 20px;
 }
 
 .section-title {
@@ -87,9 +93,10 @@ img {
     border-radius: var(--border-radius-s);
     background: var(--primary-color);
 }
+
 /* Navbar styling */
 
-header{
+header {
     position: fixed;
     width: 100%;
     z-index: 5;
@@ -103,6 +110,7 @@ header .navbar {
     align-items: center;
     justify-content: space-between;
 }
+
 .navbar .nav-logo .logo-text {
     color: white;
     font-size: var(--font-size-xl);
@@ -113,6 +121,7 @@ header .navbar {
     display: flex;
     gap: 10px;
 }
+
 .navbar .nav-menu .nav-link {
     padding: 10px 18px;
     color: white;
@@ -136,7 +145,7 @@ header .navbar {
 /* Welcome Section Styling */
 .welcome-section {
     padding: 120px 0;
-    background: #f8f8fa;
+    background: var(--white-color);
 }
 
 .welcome-section .section-content {
@@ -146,42 +155,43 @@ header .navbar {
     align-items: center;
     justify-content: space-between;
 }
+
 .features {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px;
-  padding: 30px;
-  direction: rtl;
-  box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+    direction: rtl;
+    box-sizing: border-box;
 }
 
 .feature-box {
-  background-color: #f7ebed;
-  border-radius: 10px;
-  padding: 25px;
-  width: 200px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f7ebed;
+    border-radius: 10px;
+    padding: 25px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .icon {
-  font-size: 40px;
-  margin-bottom: 10px;
-  color: var(--text-color); 
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: var(--text-color);
 }
 
 .feature-title {
-  color: var(--text-color);
-  font-weight: bold;
-  margin-bottom: 10px;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .feature-desc {
-  color: #333;
-  font-size: 15px;
-  line-height: 1.6;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.6;
 }
 
 .welcome-section .welcome-image-wrapper .welcome-image {
@@ -198,14 +208,14 @@ header .navbar {
     max-width: 100%;
 }
 
-.welcome-section .welcome-details .text{
+.welcome-section .welcome-details .text {
     line-height: 30px;
     margin: 50px 0 30px;
     text-align: center;
     font-size: var(--font-size-m);
 }
 
-.welcome-section .social-link-list{
+.welcome-section .social-link-list {
     display: flex;
     gap: 25px;
     justify-content: center;
@@ -233,6 +243,7 @@ header .navbar {
     overflow: hidden;
     margin: 0 60px 50px;
 }
+
 .p-tests-section .p-tests {
     user-select: none;
     display: flex;
@@ -266,6 +277,7 @@ header .navbar {
     opacity: 1;
     background: var(--secondary-color);
 }
+
 .p-tests-section .swiper-slide-button {
     margin-top: -50px;
     color: var(--secondary-color);
@@ -306,7 +318,8 @@ header .navbar {
     font-size: var(--font-size-l);
 }
 
-.footer-section .social-link-list .social-link:hover, .footer-section .policy-text .policy-link:hover {
+.footer-section .social-link-list .social-link:hover,
+.footer-section .policy-text .policy-link:hover {
     color: var(--secondary-color);
 }
 
@@ -316,29 +329,31 @@ header .navbar {
 }
 
 .idk {
-      display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 
- .idk-logo {
-            text-align: right;
-            margin-right: 30px; /* زيادة هذه القيمة لسحب العنصر أكثر إلى اليسار */
-        }
-        
-        .idk-logo h1 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
-        
-        .idk-logo p {
-            margin: 5px 0 0 0;
-            font-size: 0.9rem;
-        }
+.idk-logo {
+    text-align: right;
+    margin-right: 30px;
+    /* زيادة هذه القيمة لسحب العنصر أكثر إلى اليسار */
+}
+
+.idk-logo h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.idk-logo p {
+    margin: 5px 0 0 0;
+    font-size: 0.9rem;
+}
+
 /* Responsive media query code for max width 1024px */
- 
+
 @media screen and (max-width: 1024px) {
 
     .menu-section .menu-list {
@@ -352,7 +367,9 @@ header .navbar {
 }
 
 @media (min-width: 901px) {
-    #menu-close-button, #menu-open-button {
+
+    #menu-close-button,
+    #menu-open-button {
         display: none !important;
     }
 }
@@ -361,10 +378,10 @@ header .navbar {
 
 @media screen and (max-width: 900px) {
     :root {
-    --font-size-m: 1rem;
-    --font-size-l: 1.3rem;
-    --font-size-xl: 1.5rem;
-    --font-size-xxl: 1.8rem;
+        --font-size-m: 1rem;
+        --font-size-l: 1.3rem;
+        --font-size-xl: 1.5rem;
+        --font-size-xxl: 1.8rem;
     }
 
     body.show-mobile-menu header::before {
@@ -377,6 +394,7 @@ header .navbar {
         backdrop-filter: blur(5px);
         background: rgba(0, 0, 0, 0.2);
     }
+
     .navbar:where(#menu-close-button, #menu-open-button) {
         display: block;
         font-size: var(--font-size-l);
@@ -393,6 +411,7 @@ header .navbar {
         color: var(--white-color);
         font-size: var(--font-size-l);
     }
+
     .navbar .nav-menu {
         display: block;
         position: fixed;
@@ -428,9 +447,12 @@ header .navbar {
         justify-content: center;
     }
 
-    .hero-section .hero-details :is(.subtitle , .description), .about-section .about-details, .contact-section .contact-form {
+    .hero-section .hero-details :is(.subtitle, .description),
+    .about-section .about-details,
+    .contact-section .contact-form {
         max-width: 100%;
-    } 
+    }
+
     .hero-section .hero-details .buttons {
         justify-content: center;
     }
@@ -451,8 +473,8 @@ header .navbar {
         max-width: 250px;
         aspect-ratio: 1;
     }
-    
-    
+
+
 
     .contact-section .section-content {
         align-items: center;
@@ -463,16 +485,122 @@ header .navbar {
 /* Responsive media query code for max width 640px */
 
 @media screen and (max-width: 640px) {
-   
+
 
     .p-tests-section .slider-wrapper {
         margin: 0 0 30px;
     }
+
     .p-tests-section .swiper-slide-button {
         display: none;
     }
+
     .footer-section .section-content {
         flex-direction: column;
         gap: 20px;
     }
+}
+
+.card-p {
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    background-color: var(--pink-color);
+    max-width: 300px;
+    width: 300px;
+}
+
+.card-p img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.cards-container-p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 60px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+
+/* Admin pending list */
+
+.pending-list {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.pending-card {
+    background: #fff;
+    border: 1px solid var(--pink-color);
+    border-right: 5px solid var(--blue-color);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: 0.3s ease;
+    text-align: center;
+    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-title_p {
+    text-align: center;
+    padding-bottom: 60px;
+    text-transform: uppercase;
+    font-size: var(--font-size-xl);
+}
+
+.section-title_p::after {
+    content: "";
+    width: 80px;
+    height: 5px;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: var(--border-radius-s);
+    background: var(--primary-color);
+}
+
+.pending-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pending-card p {
+    margin: 8px 0;
+    font-size: 15px;
+    color: #333;
+}
+
+.pending-card a {
+    color: var(--blue-color);
+    text-decoration: underline;
+}
+
+.pending-card button {
+    margin: 10px 6px 0 0;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pending-card .accept {
+    background-color: #5FC88F;
+    color: white;
+}
+
+.pending-card .reject {
+    background-color: #FF6464;
+    color: white;
 }

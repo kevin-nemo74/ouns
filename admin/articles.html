@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/specialist/dashboard.css">
+    <link rel="stylesheet" href="../css/patient/articles.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>أُنس</title>
@@ -54,19 +54,13 @@
         </nav>
     </header>
 
-    <!-- Courses Section -->
+    <!-- Articles Sections -->
 
-    <section class="welcome-section" id="welcome">
-        <div class="section-content">
-            <div class="welcome-image-wrapper">
-                <img src="../images/logoo.png" alt="Welcome Home" class="welcome-image">
-            </div>
-            <div class="welcome-details">
-                <h2 class="section-title">الدورات</h2>
-            </div>
-        </div>
-    </section>
-
+    <div class="container" id="articles-container">
+        <h1 class="title" id="article-title"></h1>
+        <p class="content" id="article-content"></p>
+    </div>
+    
     <!-- Footer Sections -->
 
     <footer class="footer-section">
@@ -102,7 +96,10 @@
             </div>
         </div>
     </footer>
+
     <script src="../script.js"></script>
+    <script type="module" src="../articles-admin.js"></script>
+
 </body>
 
 </html>

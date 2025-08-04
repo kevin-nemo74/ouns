@@ -22,7 +22,7 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="#services" class="nav-link"><i class="fa-solid fa-screwdriver-wrench"></i>&nbsp
                         &nbspخدماتنا</a>
@@ -32,16 +32,17 @@
                         &nbspالمختصين</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#join-specialist" class="nav-link"><i class="fa-solid fa-address-card"></i>&nbsp &nbspانضم كمختص </a>
+                    <a href="#join-specialist" class="nav-link"><i class="fa-solid fa-address-card"></i>&nbsp &nbspانضم
+                        كمختص </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="#footer" class="nav-link button contact-us"> <i class="fa-solid fa-phone"></i>&nbsp
                         &nbspتواصل معنا </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link" id="form-open"> <i
-                            class="fa-solid fa-right-to-bracket"></i>&nbsp &nbspتسجيل الدخول</a>
+                    <a href="#" class="nav-link" id="form-open"> <i class="fa-solid fa-right-to-bracket"></i>&nbsp
+                        &nbspتسجيل الدخول</a>
                 </li>
             </ul>
             <button id="menu-open-button" class="fas fa-bars"></button>
@@ -93,22 +94,22 @@
                     <h2> انشاء حساب</h2>
 
                     <div class="input_box">
-                        <input  placeholder=" الاسم الكامل" required id="name-r"/>
+                        <input placeholder=" الاسم الكامل" required id="name-r" />
                         <i class="uil uil-envelope-alt email"></i>
                     </div>
 
                     <div class="input_box">
-                        <input type="email" placeholder="البريد الالكتروني" required id="email-r"/>
+                        <input type="email" placeholder="البريد الالكتروني" required id="email-r" />
                         <i class="uil uil-envelope-alt email"></i>
                     </div>
 
                     <div class="input_box">
-                        <input type="password" placeholder="كلمة السر" required id="psw-r"/>
+                        <input type="password" placeholder="كلمة السر" required id="psw-r" />
                         <i class="uil uil-lock password"></i>
                         <i class="uil uil-eye-slash pw_hide"></i>
                     </div>
                     <div class="input_box">
-                        <input type="password" placeholder="تأكيد كلمة السر" required id="psw2-r"/>
+                        <input type="password" placeholder="تأكيد كلمة السر" required id="psw2-r" />
                         <i class="uil uil-lock password"></i>
                         <i class="uil uil-eye-slash pw_hide"></i>
                     </div>
@@ -285,16 +286,29 @@
         <section class="join-sp-section" id="join-specialist">
             <h2 class="section-title">نموذج الانضمام</h2>
             <div class="section-content">
-                <form action="#" class="join-sp-form">
-                    <input type="text" placeholder="الاسم الكامل" class="form-input" required>
-                    <input type="email" placeholder="البريد الالكتروني" class="form-input" required>
-                    <input type="text" placeholder="رقم الهاتف" class="form-input" required>
-                    <input type="text" placeholder="التخصص" class="form-input" required>
-                    <input type="text" placeholder="سنوات الخبرة" class="form-input" required>
-                    <input type="text" placeholder="رابط السيرة الذاتية pdf" class="form-input" required>
-                    <textarea placeholder="رسالة تعريفية" class="form-input"></textarea>
-                    <button class="submit-button">ارسال</button>
+                <form id="joinForm" class="join-sp-form">
+                    <input type="text" placeholder="الاسم الكامل" class="form-input" id="fullName" required>
+                    <input type="email" placeholder="البريد الالكتروني" class="form-input" id="email" required>
+                    <input type="text" placeholder="رقم الهاتف" class="form-input" id="phone" required>
+                    <select id="specialty" class="form-input" required>
+                        <option value="" disabled selected>التخصص</option>
+                        <option value="زوجي">زوجي</option>
+                        <option value="نفسي">نفسي</option>
+                        <option value="أسري">أسري</option>
+                    </select> <input type="text" placeholder="سنوات الخبرة" class="form-input" id="experience" required>
+                    <select id="gender" class="form-input" required>
+                        <option value="" disabled selected>اختر الجنس</option>
+                        <option value="رجل">رجل</option>
+                        <option value="امرأة">امرأة</option>
+                    </select>
+                    <input type="number" placeholder="ثمن الحصة بالدينار الجزائري" class="form-input" id="price" required>
+
+                    <input type="password" placeholder="كلمة السر" class="form-input" id="password" required>
+                    <input type="text" placeholder="رابط السيرة الذاتية pdf" class="form-input" id="cvLink" required>
+                    <textarea placeholder="رسالة تعريفية" class="form-input" id="message"></textarea>
+                    <button type="submit" class="submit-button">انضم</button>
                 </form>
+
             </div>
         </section>
         <!--Footer Section-->
@@ -335,7 +349,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
+
+    <script type="module" src="register.js"></script>
 
 </body>
 

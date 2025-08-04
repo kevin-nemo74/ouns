@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
@@ -14,6 +15,46 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app); // ✅ Firestore
+
+
+const joinForm = document.getElementById("joinForm");
+
+joinForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const fullName = document.getElementById("fullName").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const specialty = document.getElementById("specialty").value;
+  const experience = document.getElementById("experience").value;
+  const password = document.getElementById("password").value;
+  const cvLink = document.getElementById("cvLink").value;
+  const message = document.getElementById("message").value;
+  const gender = document.getElementById("gender").value;
+  const price = document.getElementById("price").value;
+
+
+  try {
+    await addDoc(collection(db, "PendingSpecialists"), {
+      fullName,
+      price,
+      email,
+      phone,
+      specialty,
+      experience,
+      password,
+      cvLink,
+      message,
+      gender,
+    });
+
+    alert("تم إرسال طلبك بنجاح. سيتم مراجعته من طرف الإدارة.");
+    joinForm.reset();
+  } catch (error) {
+    console.error("خطأ أثناء الإرسال:", error);
+    alert("حدث خطأ، حاول مرة أخرى.");
+  }
+});
 
 window.addEventListener("DOMContentLoaded", () => {
   const submitBtn = document.getElementById("submit-r");

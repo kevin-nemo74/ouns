@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/specialist/dashboard.css">
+    <link rel="stylesheet" href="../css/patient/article-d.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>أُنس</title>
@@ -14,22 +15,21 @@
     <header>
         <nav class="navbar section-content">
             <ul class="nav-menu">
-                <button id="menu-close-button" class="fas fa-times"></button>
                 <li class="nav-item">
                     <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
                 </li>
+                <button id="menu-close-button" class="fas fa-times"></button>
                 <li class="nav-item">
-                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp المختصين
-                    </a>
+                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp
+                        &nbspالمختصين </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="patients.html" class="nav-link"><i class="fa-solid fa-users-line"></i>&nbsp
-                        &nbspالعملاء</a>
+                    <a href="tests.html" class="nav-link"><i class="fa-solid fa-vial"></i>&nbsp &nbspالاختبارات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp
-                        &nbspالدورات</a>
+                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp
+                        &nbspالاشعارات</a>
                 </li>
                 <li class="nav-item">
                     <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp
@@ -54,18 +54,11 @@
         </nav>
     </header>
 
-    <!-- Courses Section -->
+    <div class="article-detail-container">
+        <h1 id="article-title">جارٍ التحميل...</h1>
+        <p id="article-content"></p>
+    </div>
 
-    <section class="welcome-section" id="welcome">
-        <div class="section-content">
-            <div class="welcome-image-wrapper">
-                <img src="../images/logoo.png" alt="Welcome Home" class="welcome-image">
-            </div>
-            <div class="welcome-details">
-                <h2 class="section-title">الدورات</h2>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer Sections -->
 
@@ -102,7 +95,11 @@
             </div>
         </div>
     </footer>
+
     <script src="../script.js"></script>
+    <script type="module" src="../articles-patient.js"></script>
+
+
 </body>
 
 </html>
