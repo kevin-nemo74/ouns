@@ -11,6 +11,8 @@
 </head>
 
 <body>
+      <div class="page-container"> 
+
     <header>
         <nav class="navbar section-content">
             <ul class="nav-menu">
@@ -24,10 +26,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp &nbspالاشعارات</a>
+                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp
+                        &nbspالاشعارات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
+                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp
+                        &nbspالدورات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp
+                        &nbspالمقالات</a>
                 </li>
                 <li class="nav-item">
                     <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات
@@ -46,19 +54,10 @@
 
     <!-- Welcome user Section -->
 
-    <section class="welcome-section" id="welcome">
-            <div class="section-content">
-                <div class="welcome-image-wrapper">
-                    <img src="../images/logoo.png" alt="Welcome Home" class="welcome-image">
-                </div>
-                <div class="welcome-details">
-                    <h2 class="section-title">مرحبًا بك، [اسم المختص]</h2>
-                </div>
-            </div>
-        </section>
-
-
-
+    <section id="notifications" class="section-content main-content">
+        <h2 class="section-title">الإشعارات</h2>
+        <div id="notifications-list" class="notifications-list"></div>
+    </section>
 
     <!-- Footer Sections -->
 
@@ -95,8 +94,80 @@
             </div>
         </div>
     </footer>
+    </div>
 
     <script src="../script.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            query,
+            where,
+            getDocs,
+            doc,
+            updateDoc
+        } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
+            authDomain: "teste-de97a.firebaseapp.com",
+            projectId: "teste-de97a",
+            storageBucket: "teste-de97a.appspot.com",
+            messagingSenderId: "238622857832",
+            appId: "1:238622857832:web:34485f56458abdfa5139dd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const specialistEmail = localStorage.getItem("userEmail");
+
+        async function loadNotifications() {
+            const q = query(
+                collection(db, "Appointments"),
+                where("specialist", "==", specialistEmail),
+                where("status", "==", "معلقة")
+            );
+
+            const querySnapshot = await getDocs(q);
+            const container = document.getElementById("notifications-list");
+
+            if (querySnapshot.empty) {
+                container.innerHTML = "<p>لا توجد إشعارات حالياً.</p>";
+                return;
+            }
+
+            querySnapshot.forEach((docSnap) => {
+                const data = docSnap.data();
+
+                const notif = document.createElement("div");
+                notif.className = "notification-item";
+                notif.innerHTML = `
+      <p>لديك موعد جديد من <strong>${data.clientName}</strong></p>
+      <p>التاريخ: ${data.date} — الساعة: ${data.time}</p>
+      <button class="accept-btn">قبول</button>
+      <button class="reject-btn">رفض</button>
+    `;
+
+                // أزرار القبول والرفض
+                notif.querySelector(".accept-btn").onclick = async () => {
+                    await updateDoc(doc(db, "Appointments", docSnap.id), { status: "مقبول" });
+                    notif.remove();
+                };
+
+                notif.querySelector(".reject-btn").onclick = async () => {
+                    await updateDoc(doc(db, "Appointments", docSnap.id), { status: "مرفوض" });
+                    notif.remove();
+                };
+
+                container.appendChild(notif);
+            });
+        }
+
+        loadNotifications();
+    </script>
+
 </body>
 
 </html>

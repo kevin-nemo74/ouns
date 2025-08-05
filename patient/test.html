@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>أُنس - اختبار MBTI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/patient/tests.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar section-content">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
+        </li>
+        <button id="menu-close-button" class="fas fa-times"></button>
+        <li class="nav-item">
+          <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp &nbspالمختصين </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="tests.html" class="nav-link"><i class="fa-solid fa-vial"></i>&nbsp &nbspالاختبارات</a>
+        </li>
+        <li class="nav-item">
+          <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp &nbspالاشعارات</a>
+        </li>
+        <li class="nav-item">
+          <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp &nbspالمقالات</a>
+        </li>
+        <li class="nav-item">
+          <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-days"></i>&nbsp المواعيد
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات الحساب</a>
+        </li>
+        <li class="nav-item">
+          <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp &nbspتسجيل
+            الخروج </i>
+          </a>
+        </li>
+      </ul>
+      <button id="menu-open-button" class="fas fa-bars"></button>
+
+    </nav>
+  </header>
+
+  <main>
+    <div id="test-container" style="display:none;">
+      <div id="question-number">السؤال 1 من 15</div>
+      <div id="question-text">...</div>
+      <div id="options">
+        <button class="option-btn" data-value="A">الخيار 1</button>
+        <button class="option-btn" data-value="B">الخيار 2</button>
+      </div>
+    </div>
+
+    <div id="result" style="display:none;"></div>
+  </main>
+
+  <footer class="footer-section">
+    <div class="section-content">
+      <p class="policy-text">
+        <a href="#" class="policy-link">شروط الاستخدام</a>
+        <span class="separator">•</span>
+        <a href="#" class="policy-link">سياسة الخصوصية</a>
+      </p>
+      <div class="idk">
+        <div class="social-link-list">
+          <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-link"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="copyright-text">2025 © جميع الحقوق محفوظة</p>
+      </div>
+      <div class="idk-logo policy-link">
+        <h1>أُنس</h1>
+        <p>للإرشاد الزواجي والأسري</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
+      authDomain: "teste-de97a.firebaseapp.com",
+      projectId: "teste-de97a",
+      storageBucket: "teste-de97a.appspot.com",
+      messagingSenderId: "238622857832",
+      appId: "1:238622857832:web:34485f56458abdfa5139dd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let currentQuestion = 0;
+    let testData = null;
+    let answers = [];
+
+    async function initTest() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const testId = urlParams.get('test');
+      if (!testId) return;
+
+      const docRef = doc(db, "tests", testId);
+      const docSnap = await getDoc(docRef);
+      if (!docSnap.exists()) {
+        document.body.innerHTML = "<h2>لم يتم العثور على هذا الاختبار</h2>";
+        return;
+      }
+
+      testData = docSnap.data();
+      document.getElementById("test-container").style.display = "block";
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = testData.questions[currentQuestion];
+      document.getElementById("question-number").innerText = `السؤال ${currentQuestion + 1} من ${testData.questions.length}`;
+      document.getElementById("question-text").innerText = typeof q === "string" ? q : q.text;
+
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+
+      if (testData.type === "mbti") {
+        q.options.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.classList.add("option-btn");
+          btn.innerText = opt.text;
+          btn.dataset.value = opt.value;
+          btn.dataset.dimension = q.dimension;
+          btn.onclick = () => handleAnswer(opt.value, q.dimension);
+          optionsDiv.appendChild(btn);
+        });
+      } else if (testData.type === "likert") {
+        testData.scale.forEach(scaleOpt => {
+          const btn = document.createElement("button");
+          btn.classList.add("option-btn");
+          btn.innerText = scaleOpt.label;
+          btn.dataset.value = scaleOpt.value;
+          btn.onclick = () => handleAnswer(scaleOpt.value);
+          optionsDiv.appendChild(btn);
+        });
+      }
+    }
+
+    function handleAnswer(value, dimension = null) {
+      answers.push({ value: Number(value), dimension });
+
+      currentQuestion++;
+      if (currentQuestion < testData.questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById("test-container").style.display = "none";
+      const resultDiv = document.getElementById("result");
+      resultDiv.style.display = "block";
+
+      if (testData.type === "mbti") {
+        let dims = { EI: { E: 0, I: 0 }, SN: { S: 0, N: 0 }, TF: { T: 0, F: 0 }, JP: { J: 0, P: 0 } };
+        answers.forEach(a => dims[a.dimension][a.value]++);
+        let code = (dims.EI.E >= dims.EI.I ? "E" : "I") +
+          (dims.SN.S >= dims.SN.N ? "S" : "N") +
+          (dims.TF.T >= dims.TF.F ? "T" : "F") +
+          (dims.JP.J >= dims.JP.P ? "J" : "P");
+        resultDiv.innerHTML = `<h2>نمطك: ${code}</h2><p>${testData.results[code]}</p>`;
+      }
+      else if (testData.type === "likert" && testData.results[0]?.min !== undefined) {
+        let score = answers.reduce((sum, a) => sum + a.value, 0);
+        const res = testData.results.find(r => score >= r.min && score <= r.max);
+        resultDiv.innerHTML = `<h2>${res.title}</h2><p>${res.description}</p><p>درجتك: ${score}</p>`;
+      }
+      else if (testData.type === "likert") {
+        let categoryScores = testData.results.map(() => 0);
+        answers.forEach((a, i) => {
+          if (i < testData.questions.length) {
+            if (i % testData.results.length < categoryScores.length) {
+              categoryScores[i % testData.results.length] += a.value;
+            }
+          }
+        });
+        let maxIndex = categoryScores.indexOf(Math.max(...categoryScores));
+        let res = testData.results[maxIndex];
+        resultDiv.innerHTML = `<h2>${res.title}</h2><p>${res.description}</p>`;
+      }
+    }
+
+    initTest();
+  </script>
+
+</body>
+
+</html>

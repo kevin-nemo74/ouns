@@ -19,15 +19,25 @@
                     <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
                 </li>
                 <li class="nav-item">
-                    <a href="appointments.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp المختصين
+                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp المختصين
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-users-line"></i>&nbsp &nbspالعملاء</a>
+                    <a href="patients.html" class="nav-link"><i class="fa-solid fa-users-line"></i>&nbsp
+                        &nbspالعملاء</a>
                 </li>
                 <li class="nav-item">
-                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
+                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp
+                        &nbspالدورات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp
+                        &nbspالمقالات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-days"></i>&nbsp المواعيد
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات
@@ -44,20 +54,27 @@
         </nav>
     </header>
 
-    <!-- Welcome user Section -->
+    <!-- Welcome Admin Section -->
 
     <section class="welcome-section" id="welcome">
-            <div class="section-content">
-                <div class="welcome-image-wrapper">
-                    <img src="../images/logoo.png" alt="Welcome Home" class="welcome-image">
-                </div>
-                <div class="welcome-details">
-                    <h2 class="section-title">مرحبًا بك، [اسم المختص]</h2>
-                </div>
+        <div class="section-content">
+            <div class="welcome-image-wrapper">
+                <img src="../images/logoo.png" alt="Welcome Home" class="welcome-image">
             </div>
-        </section>
+            <div class="welcome-details">
+                <h2 class="section-title">مرحبًا بك، [Admin]</h2>
+            </div>
+        </div>
+    </section>
 
+    <!-- Pending Section -->
 
+    <section class="pending-section" id="pending">
+        <div class="section-content">
+            <h2 class="section-title_p">طلبات الانضمام</h2>
+            <div id="pendingList" class="pending-list"></div>
+        </div>
+    </section>
 
 
     <!-- Footer Sections -->
@@ -95,6 +112,111 @@
             </div>
         </div>
     </footer>
+
+    <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  getDoc,
+  setDoc,
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
+  authDomain: "teste-de97a.firebaseapp.com",
+  projectId: "teste-de97a",
+  storageBucket: "teste-de97a.firebasestorage.app",
+  messagingSenderId: "238622857832",
+  appId: "1:238622857832:web:34485f56458abdfa5139dd"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+const pendingList = document.getElementById("pendingList");
+
+async function loadPendingSpecialists() {
+  const snapshot = await getDocs(collection(db, "PendingSpecialists"));
+  snapshot.forEach(docSnap => {
+    const data = docSnap.data();
+    const id = docSnap.id;
+
+    const card = document.createElement("div");
+    card.classList.add("pending-card");
+    card.innerHTML = `
+      <p><strong>الاسم:</strong> ${data.fullName}</p>
+      <p><strong>البريد:</strong> ${data.email}</p>
+      <p><strong>الهاتف:</strong> ${data.phone}</p>
+      <p><strong>التخصص:</strong> ${data.specialty}</p>
+      <p><strong>سعر الحصة:</strong> ${data.price}</p>
+      <p><strong>الخبرة:</strong> ${data.experience}</p>
+      <p><strong>السيرة الذاتية:</strong> <a href="${data.cvLink}" target="_blank">عرض</a></p>
+      <p><strong>الرسالة:</strong> ${data.message}</p>
+      <button class="accept" data-id="${id}">قبول</button>
+      <button class="reject" data-id="${id}">رفض</button>
+    `;
+    pendingList.appendChild(card);
+  });
+}
+
+loadPendingSpecialists();
+
+pendingList.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("accept")) {
+  const id = e.target.dataset.id;
+  const docRef = doc(db, "PendingSpecialists", id);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) return alert("الطلب غير موجود");
+
+  const data = docSnap.data();
+
+  try {
+    // 1. تسجيل المستخدم في Firebase Auth
+    const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+    const uid = userCredential.user.uid;
+
+    // 2. إضافة إلى Collection Specialists
+    await setDoc(doc(db, "Specialists", uid), {
+      name: data.fullName,
+      email: data.email,
+      cv: data.cvLink,
+      price: data.price,
+      gender: data.gender,
+      specialiste: data.specialty,
+      number: data.phone,
+      rating: 0,
+      image: "" // يمكنك وضع رابط افتراضي هنا إن أردت
+    });
+
+    // 3. حذف الطلب من Pending
+    await deleteDoc(docRef);
+
+    alert("تم قبول المختص بنجاح");
+    location.reload();
+  } catch (error) {
+    alert("خطأ أثناء القبول: " + error.message);
+  }
+}
+else if (e.target.classList.contains("reject")) {
+    const id = e.target.dataset.id;
+    await deleteDoc(doc(db, "PendingSpecialists", id));
+    alert("تم الرفض");
+    location.reload();
+  }
+});
+</script>
+
 
     <script src="../script.js"></script>
 </body>

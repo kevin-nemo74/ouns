@@ -2,123 +2,69 @@
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="../css/patient/articles.css">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>أُنس</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="../css/patient/articles.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أُنس</title>
 </head>
 
 <body>
-  <header>
+    <header>
         <nav class="navbar section-content">
             <ul class="nav-menu">
-              <li class="nav-item">
+                <li class="nav-item">
                     <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
                 </li>
                 <button id="menu-close-button" class="fas fa-times"></button>
                 <li class="nav-item">
-                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp &nbspالمختصين </a>
+                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp
+                        &nbspالمختصين </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="tests.html" class="nav-link"><i class="fa-solid fa-vial"></i>&nbsp &nbspالاختبارات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
+                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp
+                        &nbspالاشعارات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp &nbspالمقالات</a>
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp
+                        &nbspالمقالات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات الحساب</a>
+                    <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-days"></i>&nbsp المواعيد
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp &nbspتسجيل الخروج </i>
-</a>
+                    <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات
+                        الحساب</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp
+                        &nbspتسجيل الخروج </i>
+                    </a>
                 </li>
             </ul>
             <button id="menu-open-button" class="fas fa-bars"></button>
 
         </nav>
     </header>
+    <main>
 
-  <section class="articles-section" id="about">
-    <div class="section-content">
-      <div class="p-articles-section">
-
-        <div class="card-t">
-          <div class="card-header-t">
-            <h2 class="card-title-t">اختبارات اسرية</h2>
-          </div>
-          <p class="card-desc-t">قيّم صحتك النفسية واعرف مدى تأثرك بالضغوط اليومية.</p>
-          <ul class="card-list-t">
-            <li>اختبار القلق والاكتئاب<br><span>كنزرك على مساعدتك مع الوقت</span></li>
-            <li>اختبار الصلابة النفسية<br><span>تعرف على قدرتك على التكيف</span></li>
-            <li>اختبار التوتر الأسري<br><span><br></span></li>
-          </ul>
-          <button class="card-button-t">ابدأ التقييم</button>
+        <div class="container" id="articles-container">
+            <h1 class="title" id="article-title"></h1>
+            <p class="content" id="article-content"></p>
         </div>
-
-        <div class="card-t">
-          <div class="card-header-t">
-            <h2 class="card-title-t">اختبارات تربوية</h2>
-          </div>
-          <p class="card-desc-t">تعرف شخصيتك، نقاط قوتك، وأسلوب تواصلك وتعاطيك مع حياتك.</p>
-          <ul class="card-list-t">
-            <li>اختبار نمط الشخصية (MBTI)<br><span>اكتشف نمطك من ١٦ نمطًا مع تحليل</span></li>
-            <li>اختبار الذكاء العاطفي<br><span>في قدرتك على فهم مشاعر الآخرين</span></li>
-            <li>اختبار نمط التواصل<br><span>طرق تعبيرك وتأثيرك في غيرك</span></li>
-          </ul>
-          <button class="card-button-t">ابدأ الاختبار</button>
-        </div>
-
-      </div>
-      <div class="p-articles-section">
-
-        <div class="card-t">
-          <div class="card-header-t">
-            <h2 class="card-title-t">مقالات</h2>
-          </div>
-          <p class="card-desc-t">قيّم صحتك النفسية واعرف مدى تأثرك بالضغوط اليومية.</p>
-          <ul class="card-list-t">
-            <li>اختبار القلق والاكتئاب<br><span>كنزرك على مساعدتك مع الوقت</span></li>
-            <li>اختبار الصلابة النفسية<br><span>تعرف على قدرتك على التكيف</span></li>
-            <li>اختبار التوتر الأسري<br><span><br></span></li>
-          </ul>
-          <button class="card-button-t">ابدأ التقييم</button>
-        </div>
-
-        <div class="card-t">
-          <div class="card-header-t">
-            <h2 class="card-title-t">اختبارات شخصية</h2>
-          </div>
-          <p class="card-desc-t">تعرف شخصيتك، نقاط قوتك، وأسلوب تواصلك وتعاطيك مع حياتك.</p>
-          <ul class="card-list-t">
-            <li>اختبار نمط الشخصية (MBTI)<br><span>اكتشف نمطك من ١٦ نمطًا مع تحليل</span></li>
-            <li>اختبار الذكاء العاطفي<br><span>في قدرتك على فهم مشاعر الآخرين</span></li>
-            <li>اختبار نمط التواصل<br><span>طرق تعبيرك وتأثيرك في غيرك</span></li>
-          </ul>
-          <button class="card-button-t">ابدأ الاختبار</button>
-        </div>
-
-      </div>
-      <div class="about-details">
-        <h2 class="section-title">مقالاتنا... نافذة للتأمل والتغيير</h2>
-        <p class="text">
-في هذه المساحة، نكتب بصدق عن الحياة الزوجية، ونسلط الضوء على تفاصيلها، ونقترح حلولًا تنبع من الوعي والتجربة.
-كل مقال هو دعوة للتفكير، ومساهمة في بناء أسرة أكثر فهمًا واستقرارًا.</p>
-      </div>
-    </div>
-  </section>
-  <section class="specialist-section">
+    </main>
 
     <!-- Footer Sections -->
 
-     <footer class="footer-section">
+    <footer class="footer-section">
         <div class="section-content">
             <p class="policy-text">
                 <a href="#" class="policy-link">شروط الاستخدام</a>
@@ -151,11 +97,8 @@
             </div>
         </div>
     </footer>
+    <script type="module" src="../articles-patient.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="../script.js"></script>
-
-*
 </body>
 
 </html>

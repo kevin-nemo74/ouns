@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/specialist/appointments.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أُنس</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar section-content">
+            <ul class="nav-menu">
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp المختصين
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="patients.html" class="nav-link"><i class="fa-solid fa-users-line"></i>&nbsp
+                        &nbspالعملاء</a>
+                </li>
+                <li class="nav-item">
+                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp
+                        &nbspالدورات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp
+                        &nbspالمقالات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-days"></i>&nbsp المواعيد
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات
+                        الحساب</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp
+                        &nbspتسجيل الخروج </i>
+                    </a>
+                </li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+
+        </nav>
+    </header>
+
+    <div class="page-container">
+
+
+        <!-- Appointments Section -->
+
+        <section id="appointments-container" class="section-content">
+            <h2 class="section-title">قائمة المواعيد</h2>
+            <div id="appointments-list"></div>
+        </section>
+        <!-- Footer Sections -->
+
+        <footer class="footer-section">
+            <div class="section-content">
+                <p class="policy-text">
+                    <a href="#" class="policy-link">شروط الاستخدام</a>
+                    <span class="separator">•</span>
+                    <a href="#" class="policy-link">سياسة الخصوصية</a>
+                </p>
+                <div class="idk">
+                    <div class="social-link-list">
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <p class="copyright-text">2025 © جميع الحقوق محفوظة</p>
+                </div>
+                <div class="idk-logo policy-link">
+                    <h1>أُنس</h1>
+                    <p>للإرشاد الزواجي والأسري</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import {
+        getFirestore,
+        collection,
+        query,
+        where,
+        getDocs,
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
+        authDomain: "teste-de97a.firebaseapp.com",
+        projectId: "teste-de97a",
+        storageBucket: "teste-de97a.appspot.com",
+        messagingSenderId: "238622857832",
+        appId: "1:238622857832:web:34485f56458abdfa5139dd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const appointmentsRef = collection(db, "Appointments");
+const appointmentsList = document.getElementById("appointments-list");
+
+// جلب فقط المواعيد المقبولة
+const q = query(appointmentsRef, where("status", "==", "مقبول"));
+const snapshot = await getDocs(q);
+
+// تأكد أن هناك نتائج
+if (!snapshot.empty) {
+  snapshot.forEach(doc => {
+    const data = doc.data();
+
+    const card = document.createElement("div");
+    card.classList.add("appointment-card");
+
+    card.innerHTML = `
+      <p><strong>العميل:</strong> ${data.client}</p>
+      <p><strong>المختص:</strong> ${data.specialist}</p>
+      <p><strong>التاريخ:</strong> ${data.date}</p>
+      <p><strong>الوقت:</strong> ${data.time}</p>
+    `;
+
+    appointmentsList.appendChild(card);
+  });
+} else {
+  appointmentsList.innerHTML = "<p>لا توجد مواعيد مقبولة حاليا.</p>";
+}
+
+
+</script>
+
+    <script src="../script.js"></script>
+</body>
+
+</html>

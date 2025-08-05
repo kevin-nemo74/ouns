@@ -13,6 +13,70 @@
 </head>
 
 <body>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import {
+      getFirestore, collection, query, where, getDocs
+    } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
+      authDomain: "teste-de97a.firebaseapp.com",
+      projectId: "teste-de97a",
+      storageBucket: "teste-de97a.appspot.com",
+      messagingSenderId: "238622857832",
+      appId: "1:238622857832:web:34485f56458abdfa5139dd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const domainTitles = [
+      "اختبارات اسرية",
+      "اختبارات تربوية",
+      "اختبارات نفسية",
+      "اختبارات شخصية"
+    ];
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const buttons = document.querySelectorAll(".card-button-t");
+      const popup = document.getElementById("popup-overlay");
+      const popupList = document.getElementById("popup-tests-list");
+      const closeBtn = document.getElementById("close-popup");
+
+      buttons.forEach((btn, index) => {
+        btn.addEventListener("click", async () => {
+          const domain = domainTitles[index];
+const q = query(collection(db, "tests"), where("category", "==", domain));
+          const snapshot = await getDocs(q);
+
+          popupList.innerHTML = "";
+
+          if (snapshot.empty) {
+            popupList.innerHTML = "<p>لا توجد اختبارات حالياً في هذا القسم.</p>";
+          } else {
+            snapshot.forEach(doc => {
+              const data = doc.data();
+              popupList.innerHTML += `
+              <div class="test-item">
+                <h4>${data.title}</h4>
+                <p>${data.description}</p>
+                <button onclick="window.location.href='test.html?test=${doc.id}'">ابدأ الاختبار</button>
+              </div>
+            `;
+            });
+          }
+
+          popup.style.display = "flex";
+        });
+      });
+
+      closeBtn.addEventListener("click", () => {
+        popup.style.display = "none";
+      });
+    });
+  </script>
+
   <header>
     <nav class="navbar section-content">
       <ul class="nav-menu">
@@ -28,10 +92,14 @@
           <a href="tests.html" class="nav-link"><i class="fa-solid fa-vial"></i>&nbsp &nbspالاختبارات</a>
         </li>
         <li class="nav-item">
-          <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
+          <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp &nbspالاشعارات</a>
         </li>
         <li class="nav-item">
           <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp &nbspالمقالات</a>
+        </li>
+        <li class="nav-item">
+          <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-days"></i>&nbsp المواعيد
+          </a>
         </li>
         <li class="nav-item">
           <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات الحساب</a>
@@ -160,9 +228,13 @@
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="../script.js"></script>
-
+    <div id="popup-overlay" class="popup-overlay" style="display: none;">
+      <div class="popup-content">
+        <span id="close-popup" class="close-btn">&times;</span>
+        <h3 id="popup-title">الاختبارات المتاحة</h3>
+        <div id="popup-tests-list" class="popup-tests-list"></div>
+      </div>
+    </div>
 </body>
 
 </html>

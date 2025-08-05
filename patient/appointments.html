@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/specialist/appointments.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>أُنس</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar section-content">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
+                </li>
+                <button id="menu-close-button" class="fas fa-times"></button>
+                <li class="nav-item">
+                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp
+                        &nbspالمختصين </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="tests.html" class="nav-link"><i class="fa-solid fa-vial"></i>&nbsp &nbspالاختبارات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp
+                        &nbspالاشعارات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp
+                        &nbspالمقالات</a>
+                </li>
+                <li class="nav-item">
+                    <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-days"></i>&nbsp المواعيد
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات
+                        الحساب</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp
+                        &nbspتسجيل الخروج </i>
+                    </a>
+                </li>
+            </ul>
+            <button id="menu-open-button" class="fas fa-bars"></button>
+
+        </nav>
+    </header>
+    <div class="page-container">
+
+
+        <!-- Appointments Section -->
+
+        <section id="appointments" class="section-content">
+            <h2 class="section-title">قائمة المواعيد القادمة</h2>
+            <div id="appointments-list"></div>
+        </section>
+        <!-- Footer Sections -->
+
+        <footer class="footer-section">
+            <div class="section-content">
+                <p class="policy-text">
+                    <a href="#" class="policy-link">شروط الاستخدام</a>
+                    <span class="separator">•</span>
+                    <a href="#" class="policy-link">سياسة الخصوصية</a>
+                </p>
+                <div class="idk">
+                    <div class="social-link-list">
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <p class="copyright-text">2025 © جميع الحقوق محفوظة</p>
+                </div>
+                <div class="idk-logo policy-link">
+                    <h1>أُنس</h1>
+                    <p>للإرشاد الزواجي والأسري</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            query,
+            where,
+            getDocs,
+            doc,
+            deleteDoc
+        } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
+            authDomain: "teste-de97a.firebaseapp.com",
+            projectId: "teste-de97a",
+            storageBucket: "teste-de97a.appspot.com",
+            messagingSenderId: "238622857832",
+            appId: "1:238622857832:web:34485f56458abdfa5139dd"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const clientEmail = localStorage.getItem("userEmail");
+        const appointmentsRef = collection(db, "Appointments");
+
+        const q = query(
+            appointmentsRef,
+            where("client", "==", clientEmail),
+            where("status", "==", "مقبول")
+        );
+
+        const snapshot = await getDocs(q);
+        const container = document.getElementById("appointments-list");
+        container.innerHTML = "";
+
+        snapshot.forEach(async (docSnap) => {
+            const appointment = docSnap.data();
+
+            const dateStr = appointment.date;
+            const timeStr = appointment.time;
+
+            const appointmentDateTime = new Date(`${dateStr}T${timeStr}`);
+            const now = new Date();
+
+            if (appointmentDateTime < now) {
+                await deleteDoc(doc(db, "Appointments", docSnap.id));
+            } else {
+                const div = document.createElement("div");
+                div.className = "appointment-card";
+                div.innerHTML = `
+                <p><strong>التاريخ:</strong> ${dateStr}</p>
+                <p><strong>الوقت:</strong> ${timeStr}</p>
+                <p><strong>المختص:</strong> ${appointment.specialistName}</p>
+            `;
+                container.appendChild(div);
+            }
+        });
+    </script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

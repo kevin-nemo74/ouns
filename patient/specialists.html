@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="../css/patient/specialists.css">
@@ -14,32 +13,41 @@
 </head>
 
 <body>
-     <header>
+    <header>
         <nav class="navbar section-content">
             <ul class="nav-menu">
-              <li class="nav-item">
+                <li class="nav-item">
                     <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i>&nbsp &nbspالرئيسية</a>
                 </li>
                 <button id="menu-close-button" class="fas fa-times"></button>
                 <li class="nav-item">
-                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp &nbspالمختصين </a>
+                    <a href="specialists.html" class="nav-link"><i class="fa-solid fa-user-doctor"></i>&nbsp
+                        &nbspالمختصين </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="tests.html" class="nav-link"><i class="fa-solid fa-vial"></i>&nbsp &nbspالاختبارات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
+                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp
+                        &nbspالاشعارات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp &nbspالمقالات</a>
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp
+                        &nbspالمقالات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات الحساب</a>
+                    <a href="appointments.html" class="nav-link"><i class="fa-solid fa-calendar-days"></i>&nbsp المواعيد
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp &nbspتسجيل الخروج </i>
-</a>
+                    <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات
+                        الحساب</a>
+                </li>
+                <li class="nav-item">
+                    <a href="../index.html" class="nav-link" id="form-open"><i class="fas fa-sign-out-alt"></i>&nbsp
+                        &nbspتسجيل الخروج </i>
+                    </a>
                 </li>
             </ul>
             <button id="menu-open-button" class="fas fa-bars"></button>
@@ -75,7 +83,7 @@
 
     <!-- Footer Sections -->
 
-     <footer class="footer-section">
+    <footer class="footer-section">
         <div class="section-content">
             <p class="policy-text">
                 <a href="#" class="policy-link">شروط الاستخدام</a>
@@ -108,6 +116,29 @@
             </div>
         </div>
     </footer>
+    <!-- نافذة الحجز -->
+    <div id="booking-popup" class="booking-popup hidden">
+        <div class="booking-content">
+            <span id="close-popup" class="close-btn">&times;</span>
+            <h3>حجز موعد</h3>
+            <label for="booking-date">اختر التاريخ:</label>
+            <input type="date" id="booking-date">
+
+            <label for="booking-time">اختر التوقيت:</label>
+            <select id="booking-time">
+                <option value="">-- اختر الوقت --</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+            </select>
+
+            <button id="confirm-booking">تأكيد الحجز</button>
+        </div>
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -115,22 +146,6 @@
     <script src="../script.js"></script>
     <script type="module" src="../specialists.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $(".doctor-rating").each(function () {
-                $(this).rateYo({
-                    rating: $(this).data('rating'),
-                    starWidth: "20px",
-                    ratedFill: "#FFD700",
-                    normalFill: "#CCCCCC",
-                    readOnly: true,
-                    rtl: true,
-                    numStars: 5,
-                    precision: 1
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

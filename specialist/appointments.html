@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="../css/specialist/dashboard.css">
+    <link rel="stylesheet" href="../css/specialist/appointments.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>أُنس</title>
 </head>
 
 <body>
-    <header>
+        <header>
         <nav class="navbar section-content">
             <ul class="nav-menu">
                 <button id="menu-close-button" class="fas fa-times"></button>
@@ -30,6 +30,9 @@
                     <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
                 </li>
                 <li class="nav-item">
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp &nbspالمقالات</a>
+                </li>
+                <li class="nav-item">
                     <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات
                         الحساب</a>
                 </li>
@@ -43,23 +46,15 @@
 
         </nav>
     </header>
-
-    <!-- Welcome user Section -->
-
-    <section class="welcome-section" id="welcome">
-            <div class="section-content">
-                <div class="welcome-image-wrapper">
-                    <img src="../images/logoo.png" alt="Welcome Home" class="welcome-image">
-                </div>
-                <div class="welcome-details">
-                    <h2 class="section-title">المواعيد</h2>
-                </div>
-            </div>
-        </section>
+    <div class="page-container">
 
 
+    <!-- Appointments Section -->
 
-
+    <section id="appointments" class="section-content">
+  <h2 class="section-title">قائمة المواعيد القادمة</h2>
+  <div id="appointments-list"></div>
+</section>
     <!-- Footer Sections -->
 
     <footer class="footer-section">
@@ -95,6 +90,73 @@
             </div>
         </div>
     </footer>
+    </div>
+    <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
+  authDomain: "teste-de97a.firebaseapp.com",
+  projectId: "teste-de97a",
+  storageBucket: "teste-de97a.appspot.com",
+  messagingSenderId: "238622857832",
+  appId: "1:238622857832:web:34485f56458abdfa5139dd"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const specialistEmail = localStorage.getItem("userEmail");
+
+async function loadAppointments() {
+  const q = query(
+    collection(db, "Appointments"),
+    where("specialist", "==", specialistEmail),
+    where("status", "==", "مقبول")
+  );
+
+  const snapshot = await getDocs(q);
+  const list = document.getElementById("appointments-list");
+
+  if (snapshot.empty) {
+    list.innerHTML = "<p style='text-align:center; font-size:1.2rem;'>لا توجد مواعيد حالياً.</p>";
+    return;
+  }
+
+  snapshot.forEach(async (docSnap) => {
+    const data = docSnap.data();
+
+    const dateTimeStr = `${data.date}T${data.time}`;
+    const appointmentDate = new Date(dateTimeStr);
+    const now = new Date();
+
+    if (appointmentDate < now) {
+      await deleteDoc(doc(db, "Appointments", docSnap.id));
+      return;
+    }
+
+    const item = document.createElement("div");
+    item.className = "appointment-item";
+    item.innerHTML = `
+      <p><strong>مع:</strong> ${data.clientName}</p>
+      <p><strong>التاريخ:</strong> ${data.date}</p>
+      <p><strong>الوقت:</strong> ${data.time}</p>
+    `;
+    list.appendChild(item);
+  });
+}
+
+loadAppointments();
+</script>
+
 
     <script src="../script.js"></script>
 </body>

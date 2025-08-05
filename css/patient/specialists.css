@@ -375,7 +375,7 @@ header .navbar {
     }
 
     .card-p-s {
-      background-color: #f7ebed;
+      background-color: var(--secondary-color);
       width: 100%;
       max-width: 350px;
       flex: 1 1 calc(50% - 20px); /* Two per row with gap */
@@ -393,6 +393,8 @@ header .navbar {
     }
 
     .card-p-s h3 {
+        color: var(--text-color);
+        font-weight: var(--font-weight-bold);
       margin: 10px 0 5px;
       font-size: 18px;
     }
@@ -425,7 +427,7 @@ header .navbar {
 
     .book-btn, .view-btn:hover {
       background-color: var(--blue-color);
-      color: white;
+      color: var(--white-color);
       font-weight: var(--font-weight-semibold);
     }
 
@@ -446,4 +448,64 @@ header .navbar {
     max-width: 100%;
   }
 
+}
+
+.hidden {
+  display: none !important;
+}
+
+.booking-popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.booking-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.booking-content label {
+  display: block;
+  margin-top: 15px;
+}
+
+.booking-content input,
+.booking-content select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#confirm-booking {
+  font-weight: var(--font-weight-semibold);
+  margin-top: 20px;
+  background: var(--blue-color);
+  color: var(--white-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#confirm-booking:hover {
+  background: var(--pink-color);
+  color: var(--text-color);
+}
+
+.close-btn {
+  float: left;
+  font-size: 24px;
+  cursor: pointer;
 }
