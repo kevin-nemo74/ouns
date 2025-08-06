@@ -62,10 +62,9 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
       const card = document.createElement("div");
       card.className = "card-p-s";
       card.innerHTML = `
-        <img src="${data.image}" alt="صورة">
+        <img src="../images/psy11.png" alt="صورة">
         <h3>${data.name}</h3>
         <p>${data.specialiste}</p>
-        <div class="stars doctor-rating" data-rating="${data.rating}"></div>
         <div class="price">${data.price} دج</div>
         <button class="book-btn" data-email="${data.email}">احجز معه</button>
         <button class="view-btn">عرض الملف</button>
@@ -73,6 +72,7 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
       container.appendChild(card);
     });
 
+<<<<<<< HEAD
     $(".doctor-rating").rateYo({
       starWidth: "20px",
       ratedFill: "#FFD700",
@@ -83,6 +83,8 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
       precision: 1
     });
 
+=======
+>>>>>>> origin/up
   } catch (error) {
     console.error("Error loading specialists:", error);
   }
@@ -94,7 +96,10 @@ let currentSpecialistEmail = null;
 document.addEventListener("DOMContentLoaded", () => {
   loadSpecialists();
 
+<<<<<<< HEAD
   // فتح نافذة الحجز
+=======
+>>>>>>> origin/up
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("book-btn")) {
       currentSpecialistEmail = e.target.dataset.email;

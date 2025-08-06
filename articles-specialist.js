@@ -38,7 +38,7 @@ async function loadArticles() {
   auth.onAuthStateChanged(async (user) => {
     if (!user) return;
 
-    const q = query(collection(db, "Articles"), where("author", "==", user.email));
+    const q = query(collection(db, "Articles"), where("email", "==", user.email));
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((docSnap) => {
@@ -140,10 +140,27 @@ function setupAddArticle() {
       return;
     }
 
+    // جلب اسم وجنس المختص عبر الإيميل
+    const specialistsRef = collection(db, "Specialists");
+    const q = query(specialistsRef, where("email", "==", user.email));
+    const querySnapshot = await getDocs(q);
+
+    let authorName = "غير معروف";
+    let gender = "غير محدد";
+
+    querySnapshot.forEach((docSnap) => {
+      const specialistData = docSnap.data();
+      authorName = specialistData.name || "غير معروف";
+      gender = specialistData.gender || "غير محدد";
+    });
+
+    // إضافة المقالة
     await addDoc(collection(db, "Articles"), {
       title,
       content,
-      author: user.email,
+      author: authorName,
+      gender: gender,
+      email: user.email,
       createdAt: new Date()
     });
 

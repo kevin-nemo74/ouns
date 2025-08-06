@@ -61,14 +61,22 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
       const card = document.createElement("div");
       card.className = "card-p-s";
       card.innerHTML = `
+<<<<<<< HEAD
         <img src="${data.image}" alt="صورة">
         <h3>${data.name}</h3>
         <p>${data.specialiste}</p>
         <div class="stars doctor-rating" data-rating="${data.rating}"></div>
+=======
+        <img src="../images/psy11.png" alt="صورة">
+        <h3>${data.name}</h3>
+        <p>${data.specialiste}</p>
+        <div class="price">${data.price} دج</div>
+>>>>>>> origin/up
       `;
       container.appendChild(card);
     });
 
+<<<<<<< HEAD
     // تفعيل النجوم بعد إدخال البطاقات
     $(".doctor-rating").rateYo({
       starWidth: "20px",
@@ -79,6 +87,8 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
       numStars: 5,
       precision: 1
     });
+=======
+>>>>>>> origin/up
 
   } catch (error) {
     console.error("Error loading specialists:", error);

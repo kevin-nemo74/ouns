@@ -69,11 +69,18 @@ async function loadArticleDetails() {
   if (docSnap.exists()) {
     const data = docSnap.data();
     titleEl.innerText = data.title;
+
     const authorEl = document.getElementById("article-author");
-if (authorEl) authorEl.innerText = `✍️ ${data.author || "غير معروف"}`;
+    if (authorEl) {
+      let prefix = "✍️ المستشار النفسي";
+      if (data.gender && data.gender === "امرأة") {
+        prefix = "✍️ المستشارة النفسية";
+      }
+      authorEl.innerText = `${prefix}: ${data.author || "غير معروف"}`;
+    }
+
     contentEl.innerText = data.content;
 
-    // زر الحذف يظهر فقط إذا كان موجودًا في الصفحة (أي صفحة admin)
     const deleteBtn = document.getElementById("delete-article-btn");
     if (deleteBtn) {
       deleteBtn.style.display = "inline";
@@ -86,8 +93,8 @@ if (authorEl) authorEl.innerText = `✍️ ${data.author || "غير معروف"}
         }
       };
     }
-
-  } else {
+  }
+  else {
     titleEl.innerText = "المقال غير موجود.";
   }
 }

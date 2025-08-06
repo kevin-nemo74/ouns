@@ -59,6 +59,7 @@ async function loadArticles() {
 async function loadArticleDetails() {
   const titleEl = document.getElementById("article-title");
   const contentEl = document.getElementById("article-content");
+  const authorEl = document.getElementById("article-author");
 
   if (!titleEl || !contentEl) return;
 
@@ -78,6 +79,13 @@ async function loadArticleDetails() {
 
   const data = docSnap.data();
   titleEl.innerText = data.title;
+
+  if (authorEl) {
+    let prefix = "المستشار النفسي";
+    if (data.gender === "امرأة") prefix = "المستشارة النفسية";
+    authorEl.innerText = `✍️ ${prefix} : ${data.author || "غير معروف"}`;
+  }
+
   contentEl.innerText = data.content;
 }
 

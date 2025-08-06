@@ -276,7 +276,7 @@ header .navbar {
 /* Join Us as Specialist Section Styling */
 
 .join-sp-section {
-    background: linear-gradient(to top, var(--white-color) 90%, var(--dark-color));
+    background: linear-gradient(to top, var(--white-color) 90%, var(--pink-color));
     padding-top: 200px; 
 }
 .join-sp-section .section-content {
