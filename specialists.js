@@ -72,19 +72,6 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
       container.appendChild(card);
     });
 
-<<<<<<< HEAD
-    $(".doctor-rating").rateYo({
-      starWidth: "20px",
-      ratedFill: "#FFD700",
-      normalFill: "#CCCCCC",
-      readOnly: true,
-      rtl: true,
-      numStars: 5,
-      precision: 1
-    });
-
-=======
->>>>>>> origin/up
   } catch (error) {
     console.error("Error loading specialists:", error);
   }
@@ -96,10 +83,6 @@ let currentSpecialistEmail = null;
 document.addEventListener("DOMContentLoaded", () => {
   loadSpecialists();
 
-<<<<<<< HEAD
-  // فتح نافذة الحجز
-=======
->>>>>>> origin/up
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("book-btn")) {
       currentSpecialistEmail = e.target.dataset.email;
@@ -112,48 +95,48 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("booking-popup").classList.add("hidden");
   });
 
-document.getElementById("confirm-booking").addEventListener("click", async () => {
-  const date = document.getElementById("booking-date").value;
-  const time = document.getElementById("booking-time").value;
+  document.getElementById("confirm-booking").addEventListener("click", async () => {
+    const date = document.getElementById("booking-date").value;
+    const time = document.getElementById("booking-time").value;
 
-  if (!date || !time || !currentSpecialistEmail) {
-    alert("يرجى اختيار التاريخ والوقت.");
-    return;
-  }
+    if (!date || !time || !currentSpecialistEmail) {
+      alert("يرجى اختيار التاريخ والوقت.");
+      return;
+    }
 
-  const user = auth.currentUser;
-  if (!user) {
-    alert("يجب تسجيل الدخول أولاً.");
-    return;
-  }
+    const user = auth.currentUser;
+    if (!user) {
+      alert("يجب تسجيل الدخول أولاً.");
+      return;
+    }
 
-  try {
-    // جلب اسم العميل
-    const clientSnap = await getDocs(query(collection(db, "Patients"), where("email", "==", user.email)));
-    const clientName = clientSnap.empty ? "غير معروف" : clientSnap.docs[0].data().name;
+    try {
+      // جلب اسم العميل
+      const clientSnap = await getDocs(query(collection(db, "Patients"), where("email", "==", user.email)));
+      const clientName = clientSnap.empty ? "غير معروف" : clientSnap.docs[0].data().name;
 
-    // جلب اسم المختص
-    const specSnap = await getDocs(query(collection(db, "Specialists"), where("email", "==", currentSpecialistEmail)));
-    const specialistName = specSnap.empty ? "غير معروف" : specSnap.docs[0].data().name;
+      // جلب اسم المختص
+      const specSnap = await getDocs(query(collection(db, "Specialists"), where("email", "==", currentSpecialistEmail)));
+      const specialistName = specSnap.empty ? "غير معروف" : specSnap.docs[0].data().name;
 
-    // إنشاء الموعد
-    await addDoc(collection(db, "Appointments"), {
-      client: user.email,
-      clientName: clientName,
-      specialist: currentSpecialistEmail,
-      specialistName: specialistName,
-      date: date,
-      time: time,
-      status: "معلقة"
-    });
+      // إنشاء الموعد
+      await addDoc(collection(db, "Appointments"), {
+        client: user.email,
+        clientName: clientName,
+        specialist: currentSpecialistEmail,
+        specialistName: specialistName,
+        date: date,
+        time: time,
+        status: "معلقة"
+      });
 
-    alert(`تم حجز موعدك يوم ${date} على الساعة ${time}`);
-    document.getElementById("booking-popup").classList.add("hidden");
+      alert(`تم حجز موعدك يوم ${date} على الساعة ${time}`);
+      document.getElementById("booking-popup").classList.add("hidden");
 
-  } catch (error) {
-    console.error("Error booking appointment:", error);
-    alert("حدث خطأ أثناء الحجز. حاول مرة أخرى.");
-  }
-});
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      alert("حدث خطأ أثناء الحجز. حاول مرة أخرى.");
+    }
+  });
 
 });
