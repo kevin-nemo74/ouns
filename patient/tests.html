@@ -47,7 +47,7 @@
       buttons.forEach((btn, index) => {
         btn.addEventListener("click", async () => {
           const domain = domainTitles[index];
-const q = query(collection(db, "tests"), where("category", "==", domain));
+          const q = query(collection(db, "tests"), where("category", "==", domain));
           const snapshot = await getDocs(q);
 
           popupList.innerHTML = "";
@@ -235,6 +235,9 @@ const q = query(collection(db, "tests"), where("category", "==", domain));
         <div id="popup-tests-list" class="popup-tests-list"></div>
       </div>
     </div>
+    <script src="../menu.js" defer></script>
+    <script type="module" src="../script.js"></script>
+
 </body>
 
 </html>
