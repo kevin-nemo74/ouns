@@ -24,13 +24,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp &nbspالاشعارات</a>
+                    <a href="notifications.html" class="nav-link"><i class="fa-solid fa-bell"></i>&nbsp
+                        &nbspالاشعارات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp &nbspالدورات</a>
+                    <a href="courses.html" class="nav-link"><i class="fa-solid fa-book-open-reader"></i>&nbsp
+                        &nbspالدورات</a>
                 </li>
                 <li class="nav-item">
-                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp &nbspالمقالات</a>
+                    <a href="articles.html" class="nav-link"><i class="fa-solid fa-newspaper"></i>&nbsp
+                        &nbspالمقالات</a>
                 </li>
                 <li class="nav-item">
                     <a href="settings.html" class="nav-link"><i class="fa-solid fa-gear"></i>&nbsp &nbspاعدادات
@@ -50,15 +53,15 @@
     <!-- Welcome user Section -->
 
     <section class="welcome-section" id="welcome">
-            <div class="section-content">
-                <div class="welcome-image-wrapper">
-                    <img src="../images/logoo.png" alt="Welcome Home" class="welcome-image">
-                </div>
-                <div class="welcome-details">
-                    <h2 class="section-title">الدورات</h2>
-                </div>
+        <div class="section-content">
+            <div class="welcome-image-wrapper">
+                <img src="../images/logoo.png" alt="Welcome Home" class="welcome-image">
             </div>
-        </section>
+            <div class="welcome-details">
+                <h2 class="section-title">الدورات</h2>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer Sections -->
 
@@ -96,19 +99,20 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../menu.js" defer></script>
+    <script type="module" src="../script.js"></script>
     <script>
-  const userEmail = localStorage.getItem("userEmail");
+        const userEmail = localStorage.getItem("userEmail");
 
-  if (userEmail) {
-    console.log("الإيميل:", userEmail);
-    // هنا يمكنك استخدام الإيميل لاستعلام Firestore أو عرض معلومات
-  } else {
-    console.log("لا يوجد إيميل محفوظ، يجب إعادة تسجيل الدخول");
-    // يمكنك تحويل المستخدم إلى صفحة تسجيل الدخول إذا أردت:
-    // window.location.href = "../index.html";
-  }
-</script>
+        if (userEmail) {
+            console.log("الإيميل:", userEmail);
+            // هنا يمكنك استخدام الإيميل لاستعلام Firestore أو عرض معلومات
+        } else {
+            console.log("لا يوجد إيميل محفوظ، يجب إعادة تسجيل الدخول");
+            // يمكنك تحويل المستخدم إلى صفحة تسجيل الدخول إذا أردت:
+            // window.location.href = "../index.html";
+        }
+    </script>
 </body>
 
 </html>

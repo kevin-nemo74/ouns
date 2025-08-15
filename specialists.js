@@ -61,14 +61,19 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
 
       const card = document.createElement("div");
       card.className = "card-p-s";
+      const imageUrl = data.image && data.image.trim() !== ""
+        ? data.image
+        : "../images/psy11.png"; // ضع مسار الصورة الافتراضية هنا
+
       card.innerHTML = `
-        <img src="../images/psy11.png" alt="صورة">
-        <h3>${data.name}</h3>
-        <p>${data.specialiste}</p>
-        <div class="price">${data.price} دج</div>
-        <button class="book-btn" data-email="${data.email}">احجز معه</button>
-        <button class="view-btn">عرض الملف</button>
-      `;
+<img src="${imageUrl}" alt="صورة" width="500">
+<h3>${data.name}</h3>
+<p>${data.specialiste}</p>
+<div class="price">${data.price} دج</div>
+<button class="book-btn" data-email="${data.email}">احجز معه</button>
+<button class="view-btn">عرض الملف</button>
+`;
+
       container.appendChild(card);
     });
 

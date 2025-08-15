@@ -539,6 +539,19 @@ header .navbar {
     padding: 20px;
     justify-content: center;
 }
+.pending-section {
+    background-color: var(--white-color);
+}
+
+.no-requests {
+    text-align: center;
+    font-size: 18px;
+    color: gray;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
 
 .pending-card {
     background: #fff;

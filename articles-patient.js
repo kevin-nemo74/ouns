@@ -36,24 +36,41 @@ async function loadArticles() {
   container.appendChild(articlesWrapper);
 
   const querySnapshot = await getDocs(collection(db, "Articles"));
+  let articlesData = [];
   querySnapshot.forEach((docSnap) => {
-    const data = docSnap.data();
-    const card = document.createElement("div");
-    card.className = "card-t";
-    card.innerHTML = `
-      <div class="card-header-t">
-        <h2 class="card-title-t">${data.title}</h2>
-      </div>
-      <p class="card-desc-t">${data.content.slice(0, 100)}...</p>
-      <button class="card-button-t">اقرأ المزيد</button>
-    `;
-    card.addEventListener("click", () => {
-      localStorage.setItem("articleId", docSnap.id);
-      window.location.href = "article-d.html";
+    articlesData.push({ id: docSnap.id, ...docSnap.data() });
+  });
+
+  const filterSelect = document.getElementById("filter-category");
+
+  function renderArticles(filter = "") {
+    articlesWrapper.innerHTML = ""; // مسح المقالات السابقة
+    const filtered = filter ? articlesData.filter(a => a.category === filter) : articlesData;
+    filtered.forEach(data => {
+      const card = document.createElement("div");
+      card.className = "card-t";
+      card.innerHTML = `
+        <div class="card-header-t">
+          <h2 class="card-title-t">${data.title}</h2>
+        </div>
+        <p class="card-desc-t">${data.content.slice(0, 100)}...</p>
+        <button class="card-button-t">اقرأ المزيد</button>
+      `;
+      card.addEventListener("click", () => {
+        localStorage.setItem("articleId", data.id);
+        window.location.href = "article-d.html";
+      });
+      articlesWrapper.appendChild(card);
     });
-    articlesWrapper.appendChild(card);
+  }
+
+  renderArticles();
+
+  filterSelect.addEventListener("change", () => {
+    renderArticles(filterSelect.value);
   });
 }
+
 
 // ===== تحميل التفاصيل في article-d.html =====
 async function loadArticleDetails() {

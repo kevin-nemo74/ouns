@@ -53,6 +53,21 @@
     <!-- Articles Section -->
 
     <main>
+        <<!-- فلترة المقالات -->
+<div style="margin: 20px auto; text-align: center;">
+  <label for="filter-category" style="font-size: 18px; margin-left: 8px; font-weight: bold;">
+    
+  </label>
+  <select id="filter-category">
+    <option value="">الكل</option>
+    <option value="نفسي">نفسي</option>
+    <option value="تربوي">تربوي</option>
+    <option value="زوجي">زوجي</option>
+    <option value="أسري">أسري</option>
+  </select>
+</div>
+
+
         <div class="container" id="articles-container">
             <h1 class="title" id="article-title"></h1>
             <p class="content" id="article-content"></p>
@@ -68,6 +83,13 @@
     <div id="add-modal" class="modal hidden">
         <div class="modal-content">
             <h2>إضافة مقالة جديدة</h2>
+            <select id="article-category-input">
+                <option value="" disabled selected>نوع المقالة</option>
+                <option value="نفسي">نفسي</option>
+                <option value="تربوي">تربوي</option>
+                <option value="زواجي">زوجي</option>
+                <option value="أسري">أسري</option>
+            </select>
             <input type="text" id="article-title-input" placeholder="عنوان المقالة">
             <textarea id="article-content-input" rows="6" placeholder="محتوى المقالة"></textarea>
             <button id="submit-article-btn">إضافة</button>
@@ -111,7 +133,8 @@
         </div>
     </footer>
 
-    <script src="../script.js"></script>
+    <script src="../menu.js" defer></script>
+    <script type="module" src="../script.js"></script>
     <script type="module" src="../articles-specialist.js"></script>
 </body>
 
