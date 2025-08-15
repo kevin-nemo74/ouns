@@ -56,18 +56,24 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
     const snapshot = await getDocs(q);
 
     snapshot.forEach(doc => {
-      const data = doc.data();
+  const data = doc.data();
 
-      const card = document.createElement("div");
-      card.className = "card-p-s";
-      card.innerHTML = `
-        <img src="../images/psy11.png" alt="صورة">
-        <h3>${data.name}</h3>
-        <p>${data.specialiste}</p>
-        <div class="price">${data.price} دج</div>
-      `;
-      container.appendChild(card);
-    });
+  // التحقق من وجود صورة وإلا استخدام الصورة الافتراضية
+  const imageUrl = data.image && data.image.trim() !== ""
+                   ? data.image
+                   : "../images/psy11.png"; // ضع مسار الصورة الافتراضية هنا
+
+  const card = document.createElement("div");
+  card.className = "card-p-s";
+  card.innerHTML = `
+    <img src="${imageUrl}" alt="صورة">
+    <h3>${data.name}</h3>
+    <p>${data.specialiste}</p>
+    <div class="price">${data.price} دج</div>
+  `;
+  container.appendChild(card);
+});
+
 
 
   } catch (error) {

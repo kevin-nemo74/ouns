@@ -61,14 +61,19 @@ async function loadSpecialists(specialtyFilter = "all", genderFilter = "all") {
 
       const card = document.createElement("div");
       card.className = "card-p-s";
+      const imageUrl = data.image && data.image.trim() !== ""
+        ? data.image
+        : "../images/psy11.png"; // ضع مسار الصورة الافتراضية هنا
+
       card.innerHTML = `
-        <img src="../images/psy11.png" alt="صورة">
-        <h3>${data.name}</h3>
-        <p>${data.specialiste}</p>
-        <div class="price">${data.price} دج</div>
-        <button class="book-btn" data-email="${data.email}">احجز معه</button>
-        <button class="view-btn">عرض الملف</button>
-      `;
+<img src="${imageUrl}" alt="صورة" width="500">
+<h3>${data.name}</h3>
+<p>${data.specialiste}</p>
+<div class="price">${data.price} دج</div>
+<button class="book-btn" data-email="${data.email}">احجز معه</button>
+<button class="view-btn">عرض الملف</button>
+`;
+
       container.appendChild(card);
     });
 
@@ -95,48 +100,48 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("booking-popup").classList.add("hidden");
   });
 
-document.getElementById("confirm-booking").addEventListener("click", async () => {
-  const date = document.getElementById("booking-date").value;
-  const time = document.getElementById("booking-time").value;
+  document.getElementById("confirm-booking").addEventListener("click", async () => {
+    const date = document.getElementById("booking-date").value;
+    const time = document.getElementById("booking-time").value;
 
-  if (!date || !time || !currentSpecialistEmail) {
-    alert("يرجى اختيار التاريخ والوقت.");
-    return;
-  }
+    if (!date || !time || !currentSpecialistEmail) {
+      alert("يرجى اختيار التاريخ والوقت.");
+      return;
+    }
 
-  const user = auth.currentUser;
-  if (!user) {
-    alert("يجب تسجيل الدخول أولاً.");
-    return;
-  }
+    const user = auth.currentUser;
+    if (!user) {
+      alert("يجب تسجيل الدخول أولاً.");
+      return;
+    }
 
-  try {
-    // جلب اسم العميل
-    const clientSnap = await getDocs(query(collection(db, "Patients"), where("email", "==", user.email)));
-    const clientName = clientSnap.empty ? "غير معروف" : clientSnap.docs[0].data().name;
+    try {
+      // جلب اسم العميل
+      const clientSnap = await getDocs(query(collection(db, "Patients"), where("email", "==", user.email)));
+      const clientName = clientSnap.empty ? "غير معروف" : clientSnap.docs[0].data().name;
 
-    // جلب اسم المختص
-    const specSnap = await getDocs(query(collection(db, "Specialists"), where("email", "==", currentSpecialistEmail)));
-    const specialistName = specSnap.empty ? "غير معروف" : specSnap.docs[0].data().name;
+      // جلب اسم المختص
+      const specSnap = await getDocs(query(collection(db, "Specialists"), where("email", "==", currentSpecialistEmail)));
+      const specialistName = specSnap.empty ? "غير معروف" : specSnap.docs[0].data().name;
 
-    // إنشاء الموعد
-    await addDoc(collection(db, "Appointments"), {
-      client: user.email,
-      clientName: clientName,
-      specialist: currentSpecialistEmail,
-      specialistName: specialistName,
-      date: date,
-      time: time,
-      status: "معلقة"
-    });
+      // إنشاء الموعد
+      await addDoc(collection(db, "Appointments"), {
+        client: user.email,
+        clientName: clientName,
+        specialist: currentSpecialistEmail,
+        specialistName: specialistName,
+        date: date,
+        time: time,
+        status: "معلقة"
+      });
 
-    alert(`تم حجز موعدك يوم ${date} على الساعة ${time}`);
-    document.getElementById("booking-popup").classList.add("hidden");
+      alert(`تم حجز موعدك يوم ${date} على الساعة ${time}`);
+      document.getElementById("booking-popup").classList.add("hidden");
 
-  } catch (error) {
-    console.error("Error booking appointment:", error);
-    alert("حدث خطأ أثناء الحجز. حاول مرة أخرى.");
-  }
-});
+    } catch (error) {
+      console.error("Error booking appointment:", error);
+      alert("حدث خطأ أثناء الحجز. حاول مرة أخرى.");
+    }
+  });
 
 });

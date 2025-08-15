@@ -195,11 +195,10 @@ header .navbar {
 
 .articles-section .articles-details .text{
     line-height: 30px;
-    margin: 50px 0 30px;
+    margin: 30px 0 30px;
     text-align: center;
     font-size: var(--font-size-m);
 }
-
 
 /* Footer Section Styling */
 
@@ -574,4 +573,34 @@ body {
 
 main {
   flex: 1;
+}
+
+#article-category-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid var(--blue-color);
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--white-color);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+.filter-container {
+    margin-top: 120px; /* نفس ارتفاع navbar + أي مسافة تريدها */
+}
+#filter-category {
+  margin-top: 28px;
+   padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid var(--blue-color);
+    background-color: var(--white-color);
+    color: #333;
+    cursor: pointer;
+    outline: none;
+}
+/* عند التركيز */
+#article-category-input:focus {
+  border-color: var(--blue-color);
+  background-color: var(--white-color);
 }

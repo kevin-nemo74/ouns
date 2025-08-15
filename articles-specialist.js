@@ -26,9 +26,11 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // تحميل المقالات في articles.html
-async function loadArticles() {
+async function loadArticles(categoryFilter = "") {
   const container = document.getElementById("articles-container");
   if (!container) return;
+
+  container.innerHTML = ""; // مسح القديم
 
   const articlesWrapper = document.createElement("div");
   articlesWrapper.className = "p-articles-section";
@@ -38,9 +40,15 @@ async function loadArticles() {
   auth.onAuthStateChanged(async (user) => {
     if (!user) return;
 
-    const q = query(collection(db, "Articles"), where("email", "==", user.email));
-    const querySnapshot = await getDocs(q);
+    let qRef = query(collection(db, "Articles"), where("email", "==", user.email));
+    if (categoryFilter) {
+      qRef = query(collection(db, "Articles"),
+        where("email", "==", user.email),
+        where("category", "==", categoryFilter)
+      );
+    }
 
+    const querySnapshot = await getDocs(qRef);
     querySnapshot.forEach((docSnap) => {
       const data = docSnap.data();
       const card = document.createElement("div");
@@ -61,10 +69,12 @@ async function loadArticles() {
   });
 }
 
+
 // تحميل تفاصيل المقال في article-d.html
 async function loadArticleDetails() {
   const titleEl = document.getElementById("article-title");
   const contentEl = document.getElementById("article-content");
+
 
   if (!titleEl || !contentEl) return;
 
@@ -132,13 +142,16 @@ function setupAddArticle() {
   submitBtn.addEventListener("click", async () => {
     const title = document.getElementById("article-title-input").value.trim();
     const content = document.getElementById("article-content-input").value.trim();
+    const category = document.getElementById("article-category-input").value.trim();
+
 
     const auth = getAuth();
     const user = auth.currentUser;
-    if (!user || !title || !content) {
+    if (!user || !title || !content || !category) {
       alert("يرجى ملء جميع الحقول");
       return;
     }
+
 
     // جلب اسم وجنس المختص عبر الإيميل
     const specialistsRef = collection(db, "Specialists");
@@ -158,11 +171,13 @@ function setupAddArticle() {
     await addDoc(collection(db, "Articles"), {
       title,
       content,
+      category,
       author: authorName,
       gender: gender,
       email: user.email,
       createdAt: new Date()
     });
+
 
     alert("تمت إضافة المقال بنجاح");
     document.getElementById("add-modal").classList.add("hidden");
@@ -173,10 +188,25 @@ function setupAddArticle() {
 
 // تحديد الصفحة وتشغيل المهام
 if (window.location.pathname.includes("articles.html")) {
-  loadArticles();
-  setupModalHandlers();
-  setupAddArticle();
+    const filterSelect = document.getElementById("filter-category");
+
+    // تشغيل أول مرة بدون فلترة
+    loadArticles();
+
+    // عند تغيير الفلتر
+    if (filterSelect) {
+        filterSelect.addEventListener("change", () => {
+            const selectedCategory = filterSelect.value;
+            loadArticles(selectedCategory);
+        });
+    }
+
+    setupModalHandlers();
+    setupAddArticle();
+
 } else if (window.location.pathname.includes("article-d.html")) {
-  loadArticleDetails();
-  setupDeleteButton();
+    loadArticleDetails();
+    setupDeleteButton();
 }
+
+
