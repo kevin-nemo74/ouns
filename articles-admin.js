@@ -24,14 +24,64 @@ const db = getFirestore(app);
 // ===== تحميل المقالات في article.html =====
 async function loadArticles() {
   const container = document.getElementById("articles-container");
-  if (!container) return;
+  const articlesView = document.getElementById("articles-view");
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
+
+  if (!container || !articlesView || !categoryTilesContainer) return;
+
+  // إضافة event listeners للفئات
+  const categoryTiles = document.querySelectorAll(".category-tile");
+  categoryTiles.forEach(tile => {
+    tile.addEventListener("click", () => {
+      const category = tile.getAttribute("data-category");
+      showArticlesForCategory(category);
+    });
+  });
+
+  // إضافة event listener للعودة للفئات
+  const backButton = document.getElementById("back-to-categories");
+  if (backButton) {
+    backButton.addEventListener("click", () => {
+      showCategoryTiles();
+    });
+  }
+}
+
+function showArticlesForCategory(categoryFilter = "") {
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
+  const articlesView = document.getElementById("articles-view");
+  const currentCategoryTitle = document.getElementById("current-category-title");
+  const container = document.getElementById("articles-container");
+
+  // إخفاء فئات المقالات وإظهار المقالات
+  categoryTilesContainer.style.display = "none";
+  articlesView.style.display = "block";
+
+  // تحديث عنوان الفئة الحالية
+  currentCategoryTitle.textContent = `مقالات ${categoryFilter}`;
+
+  // مسح المقالات السابقة
+  container.innerHTML = "";
 
   const articlesWrapper = document.createElement("div");
   articlesWrapper.className = "p-articles-section";
   container.appendChild(articlesWrapper);
 
   const querySnapshot = await getDocs(collection(db, "Articles"));
-  querySnapshot.forEach((docSnap) => {
+  const filteredArticles = categoryFilter ?
+    querySnapshot.docs.filter(doc => doc.data().category === categoryFilter) :
+    querySnapshot.docs;
+
+  if (filteredArticles.length === 0) {
+    articlesWrapper.innerHTML = `
+      <div class="no-articles">
+        <p>لا توجد مقالات في هذه الفئة حالياً</p>
+      </div>
+    `;
+    return;
+  }
+
+  filteredArticles.forEach((docSnap) => {
     const data = docSnap.data();
     const card = document.createElement("div");
     card.className = "card-t";
@@ -48,6 +98,15 @@ async function loadArticles() {
     });
     articlesWrapper.appendChild(card);
   });
+}
+
+function showCategoryTiles() {
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
+  const articlesView = document.getElementById("articles-view");
+
+  // إظهار فئات المقالات وإخفاء المقالات
+  categoryTilesContainer.style.display = "block";
+  articlesView.style.display = "none";
 }
 
 // ===== تحميل التفاصيل في article-d.html =====

@@ -29,11 +29,10 @@ const db = getFirestore(app);
 // ===== تحميل المقالات في article.html =====
 async function loadArticles() {
   const container = document.getElementById("articles-container");
-  if (!container) return;
+  const articlesView = document.getElementById("articles-view");
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
 
-  const articlesWrapper = document.createElement("div");
-  articlesWrapper.className = "p-articles-section";
-  container.appendChild(articlesWrapper);
+  if (!container || !articlesView || !categoryTilesContainer) return;
 
   const querySnapshot = await getDocs(collection(db, "Articles"));
   let articlesData = [];
@@ -41,34 +40,79 @@ async function loadArticles() {
     articlesData.push({ id: docSnap.id, ...docSnap.data() });
   });
 
-  const filterSelect = document.getElementById("filter-category");
+  // إضافة event listeners للفئات
+  const categoryTiles = document.querySelectorAll(".category-tile");
+  categoryTiles.forEach(tile => {
+    tile.addEventListener("click", () => {
+      const category = tile.getAttribute("data-category");
+      showArticlesForCategory(category, articlesData);
+    });
+  });
 
-  function renderArticles(filter = "") {
-    articlesWrapper.innerHTML = ""; // مسح المقالات السابقة
-    const filtered = filter ? articlesData.filter(a => a.category === filter) : articlesData;
-    filtered.forEach(data => {
-      const card = document.createElement("div");
-      card.className = "card-t";
-      card.innerHTML = `
-        <div class="card-header-t">
-          <h2 class="card-title-t">${data.title}</h2>
-        </div>
-        <p class="card-desc-t">${data.content.slice(0, 100)}...</p>
-        <button class="card-button-t">اقرأ المزيد</button>
-      `;
-      card.addEventListener("click", () => {
-        localStorage.setItem("articleId", data.id);
-        window.location.href = "article-d.html";
-      });
-      articlesWrapper.appendChild(card);
+  // إضافة event listener للعودة للفئات
+  const backButton = document.getElementById("back-to-categories");
+  if (backButton) {
+    backButton.addEventListener("click", () => {
+      showCategoryTiles();
     });
   }
+}
 
-  renderArticles();
+function showArticlesForCategory(category, articlesData) {
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
+  const articlesView = document.getElementById("articles-view");
+  const currentCategoryTitle = document.getElementById("current-category-title");
+  const articlesList = document.getElementById("articles-list");
 
-  filterSelect.addEventListener("change", () => {
-    renderArticles(filterSelect.value);
+  // إخفاء فئات المقالات وإظهار المقالات
+  categoryTilesContainer.style.display = "none";
+  articlesView.style.display = "block";
+
+  // تحديث عنوان الفئة الحالية
+  currentCategoryTitle.textContent = `مقالات ${category}`;
+
+  // تصفية المقالات حسب الفئة
+  const filteredArticles = articlesData.filter(article => article.category === category);
+
+  // عرض المقالات
+  articlesList.innerHTML = "";
+
+  if (filteredArticles.length === 0) {
+    articlesList.innerHTML = `
+      <div class="no-articles">
+        <p>لا توجد مقالات في هذه الفئة حالياً</p>
+      </div>
+    `;
+    return;
+  }
+
+  filteredArticles.forEach(article => {
+    const card = document.createElement("div");
+    card.className = "card-t";
+    card.innerHTML = `
+      <div class="card-header-t">
+        <h2 class="card-title-t">${article.title}</h2>
+      </div>
+      <p class="card-desc-t">${article.content.slice(0, 100)}...</p>
+      <button class="card-button-t">اقرأ المزيد</button>
+    `;
+
+    card.addEventListener("click", () => {
+      localStorage.setItem("articleId", article.id);
+      window.location.href = "article-d.html";
+    });
+
+    articlesList.appendChild(card);
   });
+}
+
+function showCategoryTiles() {
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
+  const articlesView = document.getElementById("articles-view");
+
+  // إظهار فئات المقالات وإخفاء المقالات
+  categoryTilesContainer.style.display = "block";
+  articlesView.style.display = "none";
 }
 
 

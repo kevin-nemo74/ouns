@@ -26,11 +26,46 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // تحميل المقالات في articles.html
-async function loadArticles(categoryFilter = "") {
+async function loadArticles() {
   const container = document.getElementById("articles-container");
-  if (!container) return;
+  const articlesView = document.getElementById("articles-view");
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
 
-  container.innerHTML = ""; // مسح القديم
+  if (!container || !articlesView || !categoryTilesContainer) return;
+
+  // إضافة event listeners للفئات
+  const categoryTiles = document.querySelectorAll(".category-tile");
+  categoryTiles.forEach(tile => {
+    tile.addEventListener("click", () => {
+      const category = tile.getAttribute("data-category");
+      showArticlesForCategory(category);
+    });
+  });
+
+  // إضافة event listener للعودة للفئات
+  const backButton = document.getElementById("back-to-categories");
+  if (backButton) {
+    backButton.addEventListener("click", () => {
+      showCategoryTiles();
+    });
+  }
+}
+
+function showArticlesForCategory(categoryFilter = "") {
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
+  const articlesView = document.getElementById("articles-view");
+  const currentCategoryTitle = document.getElementById("current-category-title");
+  const container = document.getElementById("articles-container");
+
+  // إخفاء فئات المقالات وإظهار المقالات
+  categoryTilesContainer.style.display = "none";
+  articlesView.style.display = "block";
+
+  // تحديث عنوان الفئة الحالية
+  currentCategoryTitle.textContent = `مقالات ${categoryFilter}`;
+
+  // مسح المقالات السابقة
+  container.innerHTML = "";
 
   const articlesWrapper = document.createElement("div");
   articlesWrapper.className = "p-articles-section";
@@ -49,6 +84,16 @@ async function loadArticles(categoryFilter = "") {
     }
 
     const querySnapshot = await getDocs(qRef);
+
+    if (querySnapshot.empty) {
+      articlesWrapper.innerHTML = `
+        <div class="no-articles">
+          <p>لا توجد مقالات في هذه الفئة حالياً</p>
+        </div>
+      `;
+      return;
+    }
+
     querySnapshot.forEach((docSnap) => {
       const data = docSnap.data();
       const card = document.createElement("div");
@@ -67,6 +112,15 @@ async function loadArticles(categoryFilter = "") {
       articlesWrapper.appendChild(card);
     });
   });
+}
+
+function showCategoryTiles() {
+  const categoryTilesContainer = document.querySelector(".category-tiles-container");
+  const articlesView = document.getElementById("articles-view");
+
+  // إظهار فئات المقالات وإخفاء المقالات
+  categoryTilesContainer.style.display = "block";
+  articlesView.style.display = "none";
 }
 
 
@@ -187,25 +241,14 @@ function setupAddArticle() {
 
 // تحديد الصفحة وتشغيل المهام
 if (window.location.pathname.includes("articles.html")) {
-    const filterSelect = document.getElementById("filter-category");
-
-    // تشغيل أول مرة بدون فلترة
-    loadArticles();
-
-    // عند تغيير الفلتر
-    if (filterSelect) {
-        filterSelect.addEventListener("change", () => {
-            const selectedCategory = filterSelect.value;
-            loadArticles(selectedCategory);
-        });
-    }
-
-    setupModalHandlers();
-    setupAddArticle();
+  // تشغيل النظام الجديد للفئات
+  loadArticles();
+  setupModalHandlers();
+  setupAddArticle();
 
 } else if (window.location.pathname.includes("article-d.html")) {
-    loadArticleDetails();
-    setupDeleteButton();
+  loadArticleDetails();
+  setupDeleteButton();
 }
 
 

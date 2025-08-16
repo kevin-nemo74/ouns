@@ -55,23 +55,43 @@
         </nav>
     </header>
     <main>
-
-        <div style="margin-top: 60px ; text-align: center;">
-            <label for="filter-category" style="font-size: 18px; margin-left: 8px; font-weight: bold;">
-
-            </label>
-            <select id="filter-category">
-                <option value="">الكل</option>
-                <option value="نفسي">نفسي</option>
-                <option value="تربوي">تربوي</option>
-                <option value="زواجي">زواجي</option>
-                <option value="أسري">أسري</option>
-
-            </select>
+        <div class="category-tiles-container">
+            <h2 class="tiles-title">اختر فئة المقالات</h2>
+            <div class="category-tiles">
+                <div class="category-tile" data-category="نفسي">
+                    <div class="tile-icon">🧠</div>
+                    <h3 class="tile-title">نفسي</h3>
+                    <p class="tile-description">مقالات في علم النفس والصحة النفسية</p>
+                </div>
+                <div class="category-tile" data-category="تربوي">
+                    <div class="tile-icon">📚</div>
+                    <h3 class="tile-title">تربوي</h3>
+                    <p class="tile-description">مقالات في التربية والتعليم</p>
+                </div>
+                <div class="category-tile" data-category="زواجي">
+                    <div class="tile-icon">💕</div>
+                    <h3 class="tile-title">زواجي</h3>
+                    <p class="tile-description">مقالات في العلاقات الزوجية</p>
+                </div>
+                <div class="category-tile" data-category="أسري">
+                    <div class="tile-icon">👨‍👩‍👧‍👦</div>
+                    <h3 class="tile-title">أسري</h3>
+                    <p class="tile-description">مقالات في العلاقات الأسرية</p>
+                </div>
+            </div>
         </div>
-        <div class="container" id="articles-container">
-            <h1 class="title" id="article-title"></h1>
-            <p class="content" id="article-content"></p>
+
+        <div class="articles-view" id="articles-view" style="display: none;">
+            <div class="articles-header">
+                <button class="back-to-categories" id="back-to-categories">
+                    <i class="fas fa-arrow-right"></i>
+                    العودة للفئات
+                </button>
+                <h2 class="current-category-title" id="current-category-title"></h2>
+            </div>
+            <div class="container" id="articles-container">
+                <div class="p-articles-section" id="articles-list"></div>
+            </div>
         </div>
     </main>
 
