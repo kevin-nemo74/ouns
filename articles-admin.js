@@ -31,7 +31,7 @@ async function loadArticles() {
 
   // إضافة event listeners للفئات
   const categoryTiles = document.querySelectorAll(".category-tile");
-  categoryTiles.forEach(tile => {
+  categoryTiles.forEach((tile, index) => {
     tile.addEventListener("click", () => {
       const category = tile.getAttribute("data-category");
       showArticlesForCategory(category);
@@ -47,7 +47,7 @@ async function loadArticles() {
   }
 }
 
-function showArticlesForCategory(categoryFilter = "") {
+async function showArticlesForCategory(categoryFilter = "") {
   const categoryTilesContainer = document.querySelector(".category-tiles-container");
   const articlesView = document.getElementById("articles-view");
   const currentCategoryTitle = document.getElementById("current-category-title");
