@@ -727,6 +727,8 @@ main {
   color: var(--text-color);
   font-weight: var(--font-weight-bold);
   margin: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .no-articles {
