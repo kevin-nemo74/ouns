@@ -50,7 +50,7 @@
         </nav>
     </header>
     <div class="page-container">
-        
+
         <!-- Appointments Section -->
 
         <section id="appointments" class="section-content">
@@ -160,6 +160,10 @@
     </script>
     <script src="../menu.js" defer></script>
     <script type="module" src="../script.js"></script>
+    <script type="module">
+        import { protectPage } from "../auth.js";
+        protectPage("specialist"); 
+    </script>
 </body>
 
 </html>

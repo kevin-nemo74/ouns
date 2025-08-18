@@ -29,20 +29,23 @@ window.addEventListener("DOMContentLoaded", () => {
       const userEmail = userCredential.user.email;
 
       // Function to check if email exists in a collection
-      const checkRole = async (collectionName) => {
+      const checkRole = async (collectionName, roleName) => {
         const q = query(collection(db, collectionName), where("email", "==", userEmail));
         const snapshot = await getDocs(q);
-        return !snapshot.empty;
+        if (!snapshot.empty) {
+          // خزّن role + email
+          localStorage.setItem("userEmail", userEmail);
+          localStorage.setItem("role", roleName);
+          return true;
+        }
+        return false;
       };
 
-      if (await checkRole("Admins")) {
-        localStorage.setItem("userEmail", userEmail);
+      if (await checkRole("Admins", "admin")) {
         window.location.href = "admin/dashboard.html";
-      } else if (await checkRole("Patients")) {
-        localStorage.setItem("userEmail", userEmail);
+      } else if (await checkRole("Patients", "patient")) {
         window.location.href = "patient/dashboard.html";
-      } else if (await checkRole("Specialists")) {
-        localStorage.setItem("userEmail", userEmail);
+      } else if (await checkRole("Specialists", "specialist")) {
         window.location.href = "specialist/dashboard.html";
       } else {
         alert("No role found for this account.");

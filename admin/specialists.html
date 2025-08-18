@@ -121,6 +121,10 @@
     <script src="../menu.js" defer></script>
     <script type="module" src="../script.js"></script>
     <script type="module" src="../specialists-admin.js"></script>
+    <script type="module">
+        import { protectPage } from "../auth.js";
+        protectPage("admin"); 
+    </script>
 </body>
 
 </html>

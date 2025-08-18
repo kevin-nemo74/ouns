@@ -170,6 +170,10 @@
 
         loadNotifications();
     </script>
+    <script type="module">
+        import { protectPage } from "../auth.js";
+        protectPage("specialist"); 
+    </script>
 
 </body>
 

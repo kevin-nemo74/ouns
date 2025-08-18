@@ -175,6 +175,10 @@
 
         loadPatients();
     </script>
+    <script type="module">
+        import { protectPage } from "../auth.js";
+        protectPage("admin"); 
+    </script>
 </body>
 
 </html>

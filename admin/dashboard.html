@@ -146,21 +146,21 @@
         const pendingList = document.getElementById("pendingList");
 
         async function loadPendingSpecialists() {
-    const snapshot = await getDocs(collection(db, "PendingSpecialists"));
-    
-    if (snapshot.empty) {
-        pendingList.innerHTML = `<p class="no-requests">لا توجد طلبات</p>
+            const snapshot = await getDocs(collection(db, "PendingSpecialists"));
+
+            if (snapshot.empty) {
+                pendingList.innerHTML = `<p class="no-requests">لا توجد طلبات</p>
 `;
-        return;
-    }
+                return;
+            }
 
-    snapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const id = docSnap.id;
+            snapshot.forEach(docSnap => {
+                const data = docSnap.data();
+                const id = docSnap.id;
 
-        const card = document.createElement("div");
-        card.classList.add("pending-card");
-        card.innerHTML = `
+                const card = document.createElement("div");
+                card.classList.add("pending-card");
+                card.innerHTML = `
             <p><strong>الاسم:</strong> ${data.fullName}</p>
             <p><strong>البريد:</strong> ${data.email}</p>
             <p><strong>الهاتف:</strong> ${data.phone}</p>
@@ -172,9 +172,9 @@
             <button class="accept" data-id="${id}">قبول</button>
             <button class="reject" data-id="${id}">رفض</button>
         `;
-        pendingList.appendChild(card);
-    });
-}
+                pendingList.appendChild(card);
+            });
+        }
 
 
         loadPendingSpecialists();
@@ -226,6 +226,10 @@
     </script>
     <script src="../menu.js" defer></script>
     <script type="module" src="../script.js"></script>
+    <script type="module">
+        import { protectPage } from "../auth.js";
+        protectPage("admin"); 
+    </script>
 </body>
 
 </html>

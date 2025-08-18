@@ -141,6 +141,10 @@
     <script src="../menu.js" defer></script>
     <script type="module" src="../script.js"></script>
     <script type="module" src="../specialists.js"></script>
+    <script type="module">
+        import { protectPage } from "../auth.js";
+        protectPage("patient"); 
+    </script>
 
 </body>
 

@@ -104,49 +104,50 @@
   <script src="../menu.js" defer></script>
   <script type="module" src="../script.js"></script>
   <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
-import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+    import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
-  authDomain: "teste-de97a.firebaseapp.com",
-  projectId: "teste-de97a",
-  storageBucket: "teste-de97a.firebasestorage.app",
-  messagingSenderId: "238622857832",
-  appId: "1:238622857832:web:34485f56458abdfa5139dd"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdHXiTUEsC0Ix-vMpicUIRwZsPL_xUPHc",
+      authDomain: "teste-de97a.firebaseapp.com",
+      projectId: "teste-de97a",
+      storageBucket: "teste-de97a.firebasestorage.app",
+      messagingSenderId: "238622857832",
+      appId: "1:238622857832:web:34485f56458abdfa5139dd"
+    };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-const welcomeTitle = document.querySelector(".welcome-details .section-title");
+    const welcomeTitle = document.querySelector(".welcome-details .section-title");
 
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    const email = user.email;
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const email = user.email;
 
-    // البحث عن الوثيقة التي تحتوي على نفس الإيميل
-    const q = query(collection(db, "Patients"), where("email", "==", email));
-    const querySnapshot = await getDocs(q);
+        // البحث عن الوثيقة التي تحتوي على نفس الإيميل
+        const q = query(collection(db, "Patients"), where("email", "==", email));
+        const querySnapshot = await getDocs(q);
 
-    if (!querySnapshot.empty) {
-      querySnapshot.forEach((doc) => {
-        const name = doc.data().name;
-        welcomeTitle.textContent = `مرحبًا بك، ${name}`;
-      });
-    } else {
-      welcomeTitle.textContent = "مرحبًا بك";
-    }
-  } else {
-    window.location.href = "../index.html";
-  }
-});
-</script>
-
-
+        if (!querySnapshot.empty) {
+          querySnapshot.forEach((doc) => {
+            const name = doc.data().name;
+            welcomeTitle.textContent = `مرحبًا بك، ${name}`;
+          });
+        } else {
+          welcomeTitle.textContent = "مرحبًا بك";
+        }
+      } else {
+        window.location.href = "../index.html";
+      }
+    });
+  </script>
+  <script type="module">
+        import { protectPage } from "../auth.js";
+        protectPage("patient"); 
+  </script>
 
 </body>
-
 </html>

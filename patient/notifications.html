@@ -157,6 +157,10 @@
 
     loadNotifications();
   </script>
+  <script type="module">
+        import { protectPage } from "../auth.js";
+        protectPage("patient"); 
+    </script>
 
 </body>
 
