@@ -16,10 +16,10 @@ const popupList = document.getElementById("popup-tests-list");
 const closeBtn = document.getElementById("close-popup");
 
 const domainTitles = [
-  "اختبارات اسرية",
-  "اختبارات تربوية",
+  "اختبارات أسرية",
+  "اختبارات زواجية",
   "اختبارات نفسية",
-  "اختبارات شخصية"
+  "اختبارات تربوية"
 ];
 
 buttons.forEach((btn, index) => {
